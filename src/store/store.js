@@ -5,23 +5,14 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   // data in the component
-  state: {
-    
-  },
+  state: {},
 
-  getters: {
-    
-  },
+  getters: {},
 
   // methods that changes the state
-  mutations: {
-    
-  },
+  mutations: {},
 
   // methods in the component
-  actions: {
-    
-  },
-  modules: {
-  },
+  actions: {},
+  modules: {},
 });
