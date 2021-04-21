@@ -1,8 +1,10 @@
 <template>
   <div class="header">
     <div class="header-content">
-      <button @click="goHome()">Home</button>
-      <button @click="goFavorites()">My Favorite shows</button>
+      <button class="btn-header" @click="goHome()">Home</button>
+      <button class="btn-header" @click="goFavorites()">
+        My Favorite shows
+      </button>
     </div>
   </div>
 </template>
@@ -40,7 +42,7 @@ export default {
   padding-top: 3%;
 }
 
-button {
+.btn-header {
   background: transparent;
   border: none;
   margin: 20px;
