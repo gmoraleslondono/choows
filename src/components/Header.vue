@@ -17,11 +17,10 @@ export default {
   },
   methods: {
     goHome() {
-      console.log('go home');
       this.$router.push('/');
     },
     goFavorites() {
-      console.log('go favorites');
+      this.$router.push('/favorites');
     },
   },
 };
