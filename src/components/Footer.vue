@@ -22,7 +22,7 @@ export default {
   font-size: 18px;
   text-align: center;
   padding: 1%;
-  position: sticky;
+  position: fixed;
   bottom: 0;
 }
 </style>

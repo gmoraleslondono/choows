@@ -18,17 +18,23 @@
       </span>
     </div>
     <div class="buttons">
-      <button class="btn-show-preview" @click="showPopup()">See more</button>
-      <button class="btn-show-preview" @click="addFavorites()">
-        Add favorites
-      </button>
+      <Button :text="'See more'" @click="showDetails()" style="width: 50%" />
+      <Button
+        :text="'Add favorites'"
+        @click="addFavorites()"
+        style="width: 50%"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Button from './Button.vue';
 export default {
   name: 'ShowPreview',
+  components: {
+    Button,
+  },
   data() {
     return {
       showImage: require('@/assets/tv_series_placeholder.jpg'),
@@ -38,8 +44,8 @@ export default {
     };
   },
   methods: {
-    showPopup() {
-      console.log('show popup');
+    showDetails() {
+      this.$router.push('/tvShowDetails');
     },
     addFavorites() {
       console.log('add favorites');
@@ -70,19 +76,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.btn-show-preview {
-  width: 48%;
-  font-size: 20px;
-  border-radius: 10px;
-  padding: 10px;
-  border: none;
-}
-
-.genre-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  gap: 3%;
 }
 </style>
