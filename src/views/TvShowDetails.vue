@@ -1,7 +1,7 @@
 <template>
   <div class="tv-show-details">
     <Header />
-    <TvShowCard />
+    <TvShowCard :btnType="'favorites'" />
     <Footer />
   </div>
 </template>
@@ -20,11 +20,6 @@ export default {
   },
   data() {
     return {};
-  },
-  methods: {
-    addFavorites() {
-      console.log('add to favorites');
-    },
   },
 };
 </script>
