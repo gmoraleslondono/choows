@@ -3,8 +3,15 @@
     <div class="flex-box">
       <img :src="`${showImage}`" alt="TV show image" />
       <Button
+        v-if="btnType === 'favorites'"
         :text="'Add favorites'"
         @click="addFavorites()"
+        style="width: 80%"
+      />
+      <Button
+        v-else-if="btnType === 'remove'"
+        :text="'Remove'"
+        @click="removeFavorites()"
         style="width: 80%"
       />
     </div>
@@ -35,6 +42,9 @@ import Button from './Button.vue';
 
 export default {
   name: 'TvShowCard',
+  props: {
+    btnType: String,
+  },
   components: {
     Button,
   },
@@ -50,6 +60,9 @@ export default {
   methods: {
     addFavorites() {
       console.log('Add to favorites');
+    },
+    removeFavorites() {
+      console.log('Remove favorites');
     },
   },
 };

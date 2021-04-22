@@ -1,7 +1,10 @@
 <template>
-  <div class="tv-show-details">
+  <div class="favorites">
     <Header />
-    <TvShowCard :btnType="'favorites'" />
+    <div class="content">
+      <h1>My Favorites Shows</h1>
+      <TvShowCard :btnType="'remove'" />
+    </div>
     <Footer />
   </div>
 </template>
@@ -12,7 +15,7 @@ import Header from '../components/Header.vue';
 import TvShowCard from '../components/TvShowCard.vue';
 
 export default {
-  name: 'TvShowDetails',
+  name: 'Favorites',
   components: {
     Header,
     Footer,
@@ -21,14 +24,29 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    removeFavorite() {
+      console.log('remove from favorites');
+    },
+  },
 };
 </script>
 
 <style scoped>
-.tv-show-details {
+.favorites {
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: #8acb88;
+  background-color: #00b2ff;
+}
+
+.content {
+  width: 80%;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin: 5% 0;
 }
 </style>
