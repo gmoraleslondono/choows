@@ -3,20 +3,42 @@
     <Header />
     <div class="search-container">
       <input
-        v-model="showTitle"
-        type="text"
+        v-model="showName"
         placeholder="Search TV Show"
         class="form-search"
+        type="search"
+        name="search-input"
+        id="search-input"
+        @keypress.enter="search()"
       />
       <button class="btn-search form-search" @click="search()">Search</button>
     </div>
     <div class="show-cards-container">
-      <ShowPreview />
-      <ShowPreview />
-      <ShowPreview />
-      <ShowPreview />
-      <ShowPreview />
-      <ShowPreview />
+      <div
+        v-for="result in resultList"
+        :key="result.show.id"
+        class="show-preview"
+      >
+        <img
+          class="link"
+          :src="`${
+            result.show.image
+              ? result.show.image.medium
+              : require('@/assets/no-image-placeholder.jpg')
+          }`"
+          alt="TV show image"
+          @click="showDetails()"
+        />
+        <div class="content">
+          <h3 class="link" @click="showDetails()">
+            <u>{{ result.show.name }}</u>
+          </h3>
+          <span>Rating: {{ result.show.rating.average }}</span>
+        </div>
+        <div class="button-container">
+          <Button :text="'Add favorites'" @click="addFavorites()" />
+        </div>
+      </div>
     </div>
     <Footer />
   </div>
@@ -25,23 +47,36 @@
 <script>
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
-import ShowPreview from '../components/ShowPreview.vue';
+import Button from '../components/Button.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
     Header,
-    ShowPreview,
     Footer,
+    Button,
   },
   data() {
     return {
-      showTitle: '',
+      showName: '',
     };
   },
+  computed: {
+    ...mapGetters(['resultList']),
+  },
   methods: {
+    ...mapActions(['getShowsSearchList']),
     search() {
-      console.log('search');
+      const userInput = this.showName;
+      this.getShowsSearchList(userInput);
+      this.showName = '';
+    },
+    showDetails() {
+      this.$router.push('/tvShowDetails');
+    },
+    addFavorites() {
+      console.log('add favorites');
     },
   },
 };
@@ -52,6 +87,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   background-color: orange;
+  min-height: 100vh;
 }
 
 .search-container {
@@ -86,5 +122,35 @@ input {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5%;
+}
+
+.show-preview {
+  width: 20%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  color: white;
+  margin: 5% 0;
+}
+
+.button-container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+img {
+  height: 295px;
+}
+
+.link {
+  cursor: pointer;
 }
 </style>
