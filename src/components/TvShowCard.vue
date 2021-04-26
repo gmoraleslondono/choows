@@ -1,7 +1,14 @@
 <template>
   <div class="tv-show-card">
     <div class="flex-box">
-      <img :src="`${showImage}`" alt="TV show image" />
+      <img
+        :src="`${
+          tvShow.image
+            ? tvShow.image.medium
+            : require('@/assets/no-image-placeholder.jpg')
+        }`"
+        alt="TV show image"
+      />
       <Button
         v-if="btnType === 'favorites'"
         :text="'Add favorites'"
@@ -15,15 +22,19 @@
         style="width: 80%"
       />
     </div>
-    <div>
-      <h1 class="title">{{ showName }}</h1>
+    <div v-if="tvShow.status === 'In Development'">
+      This TV show is in development. There is not data to show yet.
+    </div>
+    <div v-else>
+      <h1 class="title">{{ tvShow.name }}</h1>
       <div>
-        <span>Rating: {{ showRating }}</span>
+        <span>Rating: {{ tvShow.rating.average }}</span>
+        <span>Type: {{ tvShow.type }}</span>
         <span style="display: flex">
           Genres:
           <div class="genre-list">
             <div
-              v-for="(genre, index) in showGenres"
+              v-for="(genre, index) in tvShow.genres"
               :key="index"
               style="margin-right: 5px"
             >
@@ -31,7 +42,7 @@
             </div>
           </div>
         </span>
-        <span>Summary: {{ showSummary }}</span>
+        <span>Summary: <span v-html="tvShow.summary"></span></span>
       </div>
     </div>
   </div>
@@ -39,23 +50,32 @@
 
 <script>
 import Button from './Button.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'TvShowCard',
-  props: {
-    btnType: String,
-  },
+  props: ['btnType', 'tvShowDetails'],
   components: {
     Button,
   },
   data() {
-    return {
-      showImage: require('@/assets/tv_series_placeholder.jpg'),
-      showName: 'show name',
-      showRating: 'show rating',
-      showGenres: ['drama', 'adventure'],
-      showSummary: 'Here the TV show summary.',
-    };
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      currentShow: 'currentShow',
+    }),
+  },
+  beforeMount() {
+    this.tvShow = this.$route.params.selectedShow;
+    if (this.tvShow) {
+      this.$store.dispatch('setCurrentShow', this.tvShow);
+    } else {
+      this.tvShow = this.currentShow;
+    }
+  },
+  async mounted() {
+    this.$store.dispatch('setCurrentShow', this.tvShow);
   },
   methods: {
     addFavorites() {

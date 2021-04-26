@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
   state: {
     shows: [],
     showSearchList: [],
+    currentShow: null,
   },
 
   getters: {
@@ -16,6 +17,9 @@ export const store = new Vuex.Store({
     },
     resultList: (state) => {
       return state.showSearchList;
+    },
+    currentShow: (state) => {
+      return state.currentShow;
     },
   },
 
@@ -43,6 +47,9 @@ export const store = new Vuex.Store({
         console.log(error);
       }
     },
+    setCurrentShow: ({ commit }, data) => {
+      commit('setCurrentShow', data);
+    },
   },
 
   mutations: {
@@ -52,6 +59,9 @@ export const store = new Vuex.Store({
     setResultSearch(state, data) {
       state.error = false;
       state.showSearchList = data;
+    },
+    setCurrentShow: (state, data) => {
+      state.currentShow = data;
     },
   },
 });
