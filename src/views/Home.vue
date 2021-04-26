@@ -15,8 +15,8 @@
     </div>
     <div class="show-cards-container">
       <div
-        v-for="result in resultList"
-        :key="result.show.id"
+        v-for="(result, index) in resultList"
+        :key="index"
         class="show-preview"
       >
         <img
@@ -27,10 +27,10 @@
               : require('@/assets/no-image-placeholder.jpg')
           }`"
           alt="TV show image"
-          @click="showDetails()"
+          @click="showDetails(result.show)"
         />
         <div class="content">
-          <h3 class="link" @click="showDetails()">
+          <h3 class="link" @click="showDetails(result.show)">
             <u>{{ result.show.name }}</u>
           </h3>
           <span>Rating: {{ result.show.rating.average }}</span>
@@ -72,8 +72,13 @@ export default {
       this.getShowsSearchList(userInput);
       this.showName = '';
     },
-    showDetails() {
-      this.$router.push('/tvShowDetails');
+    showDetails(selectedShow) {
+      console.log('selectedShow', selectedShow);
+      this.$router.push({
+        name: 'tvShowDetails',
+        path: '/tvShowDetails',
+        params: { selectedShow: selectedShow },
+      });
     },
     addFavorites() {
       console.log('add favorites');
@@ -122,6 +127,7 @@ input {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5%;
+  align-items: baseline;
 }
 
 .show-preview {
@@ -147,7 +153,7 @@ input {
 }
 
 img {
-  height: 295px;
+  min-height: 295px;
 }
 
 .link {
