@@ -40,8 +40,10 @@ export const store = new Vuex.Store({
           })
           .then((response) => {
             console.log('result  by search', response.data);
-            state.showSearchList = response.data;
-            commit('setResultSearch', response.data);
+            state.showSearchList = response.data.filter(function (show) {
+              return show.show.image !== null;
+            });
+            commit('setResultSearch', state.showSearchList);
           });
       } catch (error) {
         console.log(error);
