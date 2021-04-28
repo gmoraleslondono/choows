@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     shows: [],
     showSearchList: [],
     currentShow: null,
+    favorites: [],
   },
 
   getters: {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
     },
     currentShow: (state) => {
       return state.currentShow;
+    },
+    favorites: (state) => {
+      return state.favorites;
     },
   },
 
@@ -40,8 +44,10 @@ export const store = new Vuex.Store({
           })
           .then((response) => {
             console.log('result  by search', response.data);
-            state.showSearchList = response.data;
-            commit('setResultSearch', response.data);
+            state.showSearchList = response.data.filter(function (show) {
+              return show.show.image !== null;
+            });
+            commit('setResultSearch', state.showSearchList);
           });
       } catch (error) {
         console.log(error);
@@ -49,6 +55,9 @@ export const store = new Vuex.Store({
     },
     setCurrentShow: ({ commit }, data) => {
       commit('setCurrentShow', data);
+    },
+    addToFavorites({ commit }, data) {
+      commit('setToFavorites', data);
     },
   },
 
@@ -62,6 +71,19 @@ export const store = new Vuex.Store({
     },
     setCurrentShow: (state, data) => {
       state.currentShow = data;
+    },
+    setToFavorites(state, show) {
+      let allFavoritesList = [];
+
+      const localData = JSON.parse(localStorage.getItem('favoritesList'));
+
+      if (localData !== null && localData.length > 0) {
+        allFavoritesList = localData;
+      }
+
+      allFavoritesList.push(show);
+
+      state.favorites = allFavoritesList;
     },
   },
 });

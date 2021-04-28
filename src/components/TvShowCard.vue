@@ -22,10 +22,7 @@
         style="width: 80%"
       />
     </div>
-    <div v-if="tvShow.status === 'In Development'">
-      This TV show is in development. There is not data to show yet.
-    </div>
-    <div v-else>
+    <div>
       <h1 class="title">{{ tvShow.name }}</h1>
       <div>
         <span>Rating: {{ tvShow.rating.average }}</span>

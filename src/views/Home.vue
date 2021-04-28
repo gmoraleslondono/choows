@@ -36,7 +36,7 @@
           <span>Rating: {{ result.show.rating.average }}</span>
         </div>
         <div class="button-container">
-          <Button :text="'Add favorites'" @click="addFavorites()" />
+          <Button :text="'Add favorites'" @click="addFavorites(result.show)" />
         </div>
       </div>
     </div>
@@ -63,10 +63,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['resultList']),
+    ...mapGetters(['resultList', 'favorites']),
   },
   methods: {
-    ...mapActions(['getShowsSearchList']),
+    ...mapActions(['getShowsSearchList', 'addToFavorites']),
     search() {
       const userInput = this.showName;
       this.getShowsSearchList(userInput);
@@ -76,12 +76,28 @@ export default {
       console.log('selectedShow', selectedShow);
       this.$router.push({
         name: 'tvShowDetails',
-        path: '/tvShowDetails',
+        path: '/show',
         params: { selectedShow: selectedShow },
       });
     },
-    addFavorites() {
-      console.log('add favorites');
+    addFavorites(selectedShow) {
+      // validate if selectedShow already was added to favorites
+      if (this.favorites.length > 0) {
+        const favoriteValidation = this.favorites.filter(
+          (element) => element.id === selectedShow.id
+        );
+        if (favoriteValidation.length > 0) {
+          console.log('This movie already exist in favorites');
+          return;
+        }
+      }
+
+      this.addToFavorites(selectedShow);
+      // saving favorite list to local storage
+      localStorage.setItem(
+        'favoritesList',
+        JSON.stringify(this.$store.state.favorites)
+      );
     },
   },
 };
