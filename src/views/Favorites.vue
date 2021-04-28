@@ -95,5 +95,26 @@ export default {
 h1 {
   text-align: center;
   margin: 5% 0;
+  color: white;
+}
+
+.tv-shows-container {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+  font-size: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+
+.flex-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 30px;
 }
 </style>
