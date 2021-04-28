@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     shows: [],
     showSearchList: [],
     currentShow: null,
+    favorites: [],
   },
 
   getters: {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
     },
     currentShow: (state) => {
       return state.currentShow;
+    },
+    favorites: (state) => {
+      return state.favorites;
     },
   },
 
@@ -52,6 +56,9 @@ export const store = new Vuex.Store({
     setCurrentShow: ({ commit }, data) => {
       commit('setCurrentShow', data);
     },
+    addToFavorites({ commit }, data) {
+      commit('setToFavorites', data);
+    },
   },
 
   mutations: {
@@ -64,6 +71,19 @@ export const store = new Vuex.Store({
     },
     setCurrentShow: (state, data) => {
       state.currentShow = data;
+    },
+    setToFavorites(state, show) {
+      let allFavoritesList = [];
+
+      const localData = JSON.parse(localStorage.getItem('favoritesList'));
+
+      if (localData !== null && localData.length > 0) {
+        allFavoritesList = localData;
+      }
+
+      allFavoritesList.push(show);
+
+      state.favorites = allFavoritesList;
     },
   },
 });

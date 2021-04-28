@@ -3,7 +3,47 @@
     <Header />
     <div class="content">
       <h1>My Favorites Shows</h1>
-      <TvShowCard :btnType="'remove'" />
+      <div
+        class="tv-shows-container"
+        v-for="(tvShow, index) in showList"
+        :key="index"
+      >
+        <div class="flex-box">
+          <img
+            :src="`${
+              tvShow.image
+                ? tvShow.image.medium
+                : require('@/assets/no-image-placeholder.jpg')
+            }`"
+            alt="TV show image"
+          />
+          <Button
+            :text="'Remove'"
+            @click="removeFavorites()"
+            style="width: 80%"
+          />
+        </div>
+        <div>
+          <h1 class="title">{{ tvShow.name }}</h1>
+          <div>
+            <span>Rating: {{ tvShow.rating.average }}</span>
+            <span>Type: {{ tvShow.type }}</span>
+            <span style="display: flex">
+              Genres:
+              <div class="genre-list">
+                <div
+                  v-for="(genre, index) in tvShow.genres"
+                  :key="index"
+                  style="margin-right: 5px"
+                >
+                  {{ genre }}
+                </div>
+              </div>
+            </span>
+            <span>Summary: <span v-html="tvShow.summary"></span></span>
+          </div>
+        </div>
+      </div>
     </div>
     <Footer />
   </div>
@@ -12,17 +52,24 @@
 <script>
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
-import TvShowCard from '../components/TvShowCard.vue';
+import Button from '../components/Button.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Favorites',
   components: {
     Header,
     Footer,
-    TvShowCard,
+    Button,
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters(['favorites']),
+    showList() {
+      return JSON.parse(localStorage.getItem('favoritesList'));
+    },
   },
   methods: {
     removeFavorite() {
