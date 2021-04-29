@@ -72,7 +72,7 @@ export default {
     }
   },
   async mounted() {
-    this.$store.dispatch('setCurrentShow', this.tvShow);
+    await this.$store.dispatch('setCurrentShow', this.tvShow);
   },
   methods: {
     addFavorites() {

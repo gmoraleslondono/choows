@@ -5,7 +5,7 @@
       <h1>My Favorites Shows</h1>
       <div
         class="tv-shows-container"
-        v-for="(tvShow, index) in showList"
+        v-for="(tvShow, index) in list"
         :key="index"
       >
         <div class="flex-box">
@@ -19,7 +19,7 @@
           />
           <Button
             :text="'Remove'"
-            @click="removeFavorites()"
+            @click="removeFavorite(tvShow)"
             style="width: 80%"
           />
         </div>
@@ -53,7 +53,7 @@
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import Button from '../components/Button.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Favorites',
@@ -67,13 +67,19 @@ export default {
   },
   computed: {
     ...mapGetters(['favorites']),
-    showList() {
-      return JSON.parse(localStorage.getItem('favoritesList'));
+    list() {
+      if (this.favorites && this.favorites.length > 0) {
+        return this.favorites;
+      } else if (localStorage.getItem('favoritesList')) {
+        return JSON.parse(localStorage.getItem('favoritesList'));
+      }
+      return [];
     },
   },
   methods: {
-    removeFavorite() {
-      console.log('remove from favorites');
+    ...mapActions(['removeFromFavorites']),
+    removeFavorite(tvShow) {
+      this.removeFromFavorites(tvShow);
     },
   },
 };
@@ -95,5 +101,26 @@ export default {
 h1 {
   text-align: center;
   margin: 5% 0;
+  color: white;
+}
+
+.tv-shows-container {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+  font-size: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+
+.flex-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 30px;
 }
 </style>

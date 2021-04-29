@@ -59,6 +59,9 @@ export const store = new Vuex.Store({
     addToFavorites({ commit }, data) {
       commit('setToFavorites', data);
     },
+    removeFromFavorites({ commit }, data) {
+      commit('removeFromFavorites', data);
+    },
   },
 
   mutations: {
@@ -84,6 +87,26 @@ export const store = new Vuex.Store({
       allFavoritesList.push(show);
 
       state.favorites = allFavoritesList;
+
+      // saving favorite list to local storage
+      localStorage.setItem(
+        'favoritesList',
+        JSON.stringify(this.state.favorites)
+      );
+    },
+    removeFromFavorites(state, data) {
+      let allFavoritesList = [];
+
+      const localData = JSON.parse(localStorage.getItem('favoritesList'));
+
+      if (localData !== null && localData.length > 0) {
+        allFavoritesList = localData;
+      }
+
+      state.favorites = allFavoritesList.filter((show) => show.id !== data.id);
+
+      // saving favorite list to local storage
+      localStorage.setItem('favoritesList', JSON.stringify(state.favorites));
     },
   },
 });
