@@ -4,7 +4,7 @@ The app allows the user to search TV shows by name, they can see more details ab
 
 ## 🏆 The goal
 
-The program is a Vue.js web application integrated with TVmaze Public REST API. It was built using reusable components (ex: header, footer, etc) and different views connected each other.
+The program is a Vue.js web application integrated with TVmaze Public REST API. It was built using a central store to share data Vuex,js, using reusable components (ex: header, footer, etc) and different views connected each other.
 
 At the top page there is two buttons that route to home view and favorites view, allowing the user navigate through the web application.
 
@@ -28,6 +28,7 @@ See the [project board](https://github.com/gmoraleslondono/tv-shows/projects/1?a
 - CSS
 - JavaScript
 - Vue.js
+- Vuex.js
 - Window.localStorage (localStorage)
 - TVmaze Public REST API
 
@@ -48,7 +49,7 @@ See the [project board](https://github.com/gmoraleslondono/tv-shows/projects/1?a
 - VSCode (Write code)
 - Hoppscotch (Check API endpoints data)
 
-## Prerequisites
+## 📝 Prerequisites
 
 - Node.js 12.x or newer
 - Npm 6.x or newer
