@@ -37,7 +37,7 @@ export const store = new Vuex.Store({
     async getShowsSearchList({ commit, state }, searchText) {
       try {
         await axios
-          .get('http://api.tvmaze.com/search/shows?', {
+          .get('https://api.tvmaze.com/search/shows?', {
             params: {
               q: searchText,
             },
