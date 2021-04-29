@@ -1,5 +1,7 @@
 # Choows
 
+[![GitHub license](https://img.shields.io/github/license/gmoraleslondono/todoly.svg)](https://github.com/gmoraleslondono/todoly/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+
 The app allows the user to search TV shows by name, they can see more details about an specific show and add or remove shows from favorite list.
 
 ## 🏆 The goal
