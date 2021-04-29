@@ -81,23 +81,8 @@ export default {
       });
     },
     addFavorites(selectedShow) {
-      // validate if selectedShow already was added to favorites
-      if (this.favorites.length > 0) {
-        const favoriteValidation = this.favorites.filter(
-          (element) => element.id === selectedShow.id
-        );
-        if (favoriteValidation.length > 0) {
-          console.log('This movie already exist in favorites');
-          return;
-        }
-      }
-
       this.addToFavorites(selectedShow);
-      // saving favorite list to local storage
-      localStorage.setItem(
-        'favoritesList',
-        JSON.stringify(this.$store.state.favorites)
-      );
+    },
     },
   },
 };

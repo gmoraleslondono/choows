@@ -84,6 +84,13 @@ export const store = new Vuex.Store({
       allFavoritesList.push(show);
 
       state.favorites = allFavoritesList;
+
+      // saving favorite list to local storage
+      localStorage.setItem(
+        'favoritesList',
+        JSON.stringify(this.state.favorites)
+      );
+    },
     },
   },
 });

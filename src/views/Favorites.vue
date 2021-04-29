@@ -5,7 +5,7 @@
       <h1>My Favorites Shows</h1>
       <div
         class="tv-shows-container"
-        v-for="(tvShow, index) in showList"
+        v-for="(tvShow, index) in list"
         :key="index"
       >
         <div class="flex-box">
@@ -67,8 +67,13 @@ export default {
   },
   computed: {
     ...mapGetters(['favorites']),
-    showList() {
+    list() {
+      if (this.favorites && this.favorites.length > 0) {
+        return this.favorites;
+      } else if (localStorage.getItem('favoritesList')) {
       return JSON.parse(localStorage.getItem('favoritesList'));
+      }
+      return [];
     },
   },
   methods: {
