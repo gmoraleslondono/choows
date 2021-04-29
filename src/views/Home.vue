@@ -36,7 +36,16 @@
           <span>Rating: {{ result.show.rating.average }}</span>
         </div>
         <div class="button-container">
-          <Button :text="'Add favorites'" @click="addFavorites(result.show)" />
+          <Button
+            v-if="favorites && isFavorite(result.show)"
+            :text="'Remove favorite'"
+            @click="removeFavorite(result.show)"
+          />
+          <Button
+            v-else
+            :text="'Add favorites'"
+            @click="addFavorites(result.show)"
+          />
         </div>
       </div>
     </div>
@@ -66,7 +75,11 @@ export default {
     ...mapGetters(['resultList', 'favorites']),
   },
   methods: {
-    ...mapActions(['getShowsSearchList', 'addToFavorites']),
+    ...mapActions([
+      'getShowsSearchList',
+      'addToFavorites',
+      'removeFromFavorites',
+    ]),
     search() {
       const userInput = this.showName;
       this.getShowsSearchList(userInput);
@@ -83,6 +96,16 @@ export default {
     addFavorites(selectedShow) {
       this.addToFavorites(selectedShow);
     },
+    isFavorite(show) {
+      const result = this.favorites.filter((element) => element.id === show.id);
+      if (result.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    removeFavorite(selectedShow) {
+      this.removeFromFavorites(selectedShow);
     },
   },
 };

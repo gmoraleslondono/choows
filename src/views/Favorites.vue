@@ -19,7 +19,7 @@
           />
           <Button
             :text="'Remove'"
-            @click="removeFavorites()"
+            @click="removeFavorite(tvShow)"
             style="width: 80%"
           />
         </div>
@@ -53,7 +53,7 @@
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import Button from '../components/Button.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Favorites',
@@ -71,14 +71,15 @@ export default {
       if (this.favorites && this.favorites.length > 0) {
         return this.favorites;
       } else if (localStorage.getItem('favoritesList')) {
-      return JSON.parse(localStorage.getItem('favoritesList'));
+        return JSON.parse(localStorage.getItem('favoritesList'));
       }
       return [];
     },
   },
   methods: {
-    removeFavorite() {
-      console.log('remove from favorites');
+    ...mapActions(['removeFromFavorites']),
+    removeFavorite(tvShow) {
+      this.removeFromFavorites(tvShow);
     },
   },
 };
