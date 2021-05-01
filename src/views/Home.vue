@@ -178,4 +178,43 @@ input {
 img {
   min-height: 295px;
 }
+
+@media screen and (max-width: 1024px) {
+  .show-preview {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .show-preview {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .search-container {
+    width: 100%;
+    margin: 15% 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .search-container input {
+    width: 90%;
+  }
+
+  .search-container .btn-search {
+    width: 40%;
+  }
+
+  .show-preview {
+    width: 80%;
+  }
+
+  input,
+  .btn-search {
+    font-size: 1.3rem;
+  }
+}
 </style>

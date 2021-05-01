@@ -160,4 +160,29 @@ export default {
   line-height: 1.3;
   margin-left: 10px;
 }
+
+@media screen and (max-width: 450px) {
+  .content {
+    margin-top: 15%;
+  }
+
+  .tv-show-card {
+    flex-direction: column;
+    width: 80%;
+    padding-bottom: 20%;
+  }
+
+  .flex-box {
+    width: 100%;
+  }
+
+  .show-info[data-v-56d5a202] {
+    width: 100%;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 2rem;
+  }
+}
 </style>
