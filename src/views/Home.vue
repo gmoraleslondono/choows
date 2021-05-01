@@ -121,10 +121,10 @@ export default {
 
 .search-container {
   width: 60%;
-  margin: 5% auto;
+  margin: 4% auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 input {
