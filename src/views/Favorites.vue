@@ -10,12 +10,14 @@
       >
         <div class="flex-box">
           <img
+            class="link"
             :src="`${
               tvShow.image
                 ? tvShow.image.medium
                 : require('@/assets/no-image-placeholder.jpg')
             }`"
             alt="TV show image"
+            @click="showDetails(tvShow)"
           />
           <Button
             :text="'Remove'"
@@ -24,10 +26,11 @@
           />
         </div>
         <div>
-          <h1 class="title">{{ tvShow.name }}</h1>
-          <div>
+          <h1 class="title link" @click="showDetails(tvShow)">
+            <u>{{ tvShow.name }}</u>
+          </h1>
+          <div class="show-more-info">
             <span>Rating: {{ tvShow.rating.average }}</span>
-            <span>Type: {{ tvShow.type }}</span>
             <span style="display: flex">
               Genres:
               <div class="genre-list">
@@ -80,6 +83,13 @@ export default {
     ...mapActions(['removeFromFavorites']),
     removeFavorite(tvShow) {
       this.removeFromFavorites(tvShow);
+    },
+    showDetails(selectedShow) {
+      this.$router.push({
+        name: 'tvShowDetails',
+        path: '/show',
+        params: { selectedShow: selectedShow },
+      });
     },
   },
 };
