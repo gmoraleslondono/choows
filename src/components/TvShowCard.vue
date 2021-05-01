@@ -119,7 +119,6 @@ export default {
 .tv-show-card {
   width: 60%;
   margin: 0 auto;
-  font-size: 18px;
   text-align: left;
   display: flex;
   flex-direction: row;

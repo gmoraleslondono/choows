@@ -119,7 +119,6 @@ h1 {
 .tv-shows-container {
   width: 80%;
   margin: 0 auto;
-  font-size: 18px;
   text-align: left;
   display: flex;
   flex-direction: row;
@@ -138,7 +137,6 @@ h1 {
 }
 
 .show-more-info span {
-  font-size: 20px;
   line-height: normal;
 }
 </style>

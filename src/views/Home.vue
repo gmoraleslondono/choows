@@ -130,7 +130,7 @@ export default {
 
 input {
   width: 60%;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .btn-search {
@@ -166,7 +166,6 @@ input {
 .content {
   display: flex;
   flex-direction: column;
-  font-size: 20px;
   margin: 5% 0;
 }
 
