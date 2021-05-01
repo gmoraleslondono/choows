@@ -34,6 +34,18 @@
           <h3>Type:</h3>
           <span>{{ tvShow.type }}</span>
         </div>
+        <div>
+          <h3>Language:</h3>
+          <span>{{ tvShow.language }}</span>
+        </div>
+        <div>
+          <h3>Premiered:</h3>
+          <span>{{ tvShow.premiered }}</span>
+        </div>
+        <div>
+          <h3>Status:</h3>
+          <span>{{ tvShow.status }}</span>
+        </div>
         <div style="display: flex">
           <h3>Genres:</h3>
           <div class="genre-list">
