@@ -86,7 +86,6 @@ export default {
       this.showName = '';
     },
     showDetails(selectedShow) {
-      console.log('selectedShow', selectedShow);
       this.$router.push({
         name: 'tvShowDetails',
         path: '/show',
