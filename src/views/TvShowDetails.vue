@@ -2,7 +2,7 @@
   <div class="tv-show-details">
     <Header />
     <div class="content">
-    <TvShowCard :btnType="'favorites'" :tvShowDetails="tvShow" />
+      <TvShowCard :btnType="'favorites'" :tvShowDetails="tvShow" />
     </div>
     <Footer />
   </div>
