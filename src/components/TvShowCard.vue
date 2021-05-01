@@ -2,6 +2,7 @@
   <div class="tv-show-card">
     <div class="flex-box">
       <img
+        class="show-image"
         :src="`${
           tvShow.image
             ? tvShow.image.medium
@@ -22,24 +23,33 @@
         style="width: 80%"
       />
     </div>
-    <div>
+    <div class="show-info">
       <h1 class="title">{{ tvShow.name }}</h1>
-      <div>
-        <span>Rating: {{ tvShow.rating.average }}</span>
-        <span>Type: {{ tvShow.type }}</span>
-        <span style="display: flex">
-          Genres:
+      <div class="show-info-details">
+        <div>
+          <h3>Rating:</h3>
+          <span>{{ tvShow.rating.average }}</span>
+        </div>
+        <div>
+          <h3>Type:</h3>
+          <span>{{ tvShow.type }}</span>
+        </div>
+        <div style="display: flex">
+          <h3>Genres:</h3>
           <div class="genre-list">
             <div
               v-for="(genre, index) in tvShow.genres"
               :key="index"
               style="margin-right: 5px"
             >
-              {{ genre }}
+              <span>{{ genre }}</span>
             </div>
           </div>
-        </span>
-        <span>Summary: <span v-html="tvShow.summary"></span></span>
+        </div>
+        <div>
+          <h3>Summary:</h3>
+          <span v-html="tvShow.summary"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -89,9 +99,8 @@ export default {
 @import '../styles/global-styles.css';
 
 .tv-show-card {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
-  color: white;
   font-size: 18px;
   text-align: left;
   display: flex;
@@ -102,9 +111,36 @@ export default {
 .flex-box {
   display: flex;
   flex-direction: column;
+  width: 35%;
+}
+
+.show-image {
+  width: 100%;
 }
 
 .title {
   margin-bottom: 30px;
+}
+
+.show-info {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 20px;
+}
+
+.show-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.show-info h3 {
+  display: inline-block;
+}
+
+.show-info span {
+  line-height: 1.3;
+  margin-left: 10px;
 }
 </style>
