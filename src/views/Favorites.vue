@@ -19,11 +19,7 @@
             alt="TV show image"
             @click="showDetails(tvShow)"
           />
-          <Button
-            :text="'Remove'"
-            @click="removeFavorite(tvShow)"
-            style="width: 80%"
-          />
+          <Button :text="'Remove'" @click="removeFavorite(tvShow)" />
         </div>
         <div>
           <h1 class="title link" @click="showDetails(tvShow)">
@@ -43,7 +39,9 @@
                 </div>
               </div>
             </span>
-            <span>Summary: <span v-html="tvShow.summary"></span></span>
+            <span class="summary">
+              Summary: <span v-html="tvShow.summary"></span>
+            </span>
           </div>
         </div>
       </div>
@@ -138,5 +136,43 @@ h1 {
 
 .show-more-info span {
   line-height: normal;
+}
+
+.standard-button {
+  width: 80%;
+}
+
+@media screen and (max-width: 1024px) {
+  .summary {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .tv-shows-container {
+    width: 100%;
+  }
+
+  .flex-box {
+    width: 30%;
+  }
+
+  .standard-button {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  h1 {
+    margin: 15% 0;
+    font-size: 1.8rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .show-more-info span {
+    font-size: 0.9rem;
+  }
 }
 </style>

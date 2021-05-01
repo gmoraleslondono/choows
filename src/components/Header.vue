@@ -51,4 +51,17 @@ export default {
   color: white;
   cursor: pointer;
 }
+
+@media screen and (max-width: 450px) {
+  .header-content {
+    width: 81%;
+  }
+
+  .btn-header {
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+  }
+}
 </style>
