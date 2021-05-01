@@ -32,14 +32,14 @@
           <div class="show-more-info">
             <span>Rating: {{ tvShow.rating.average }}</span>
             <span style="display: flex">
-              Genres:
+              Schedule:
               <div class="genre-list">
                 <div
-                  v-for="(genre, index) in tvShow.genres"
+                  v-for="(day, index) in tvShow.schedule.days"
                   :key="index"
                   style="margin-right: 5px"
                 >
-                  {{ genre }}
+                  {{ day }}, {{ tvShow.schedule.time }}
                 </div>
               </div>
             </span>
@@ -103,6 +103,7 @@ export default {
   min-height: 100vh;
   margin: 0 auto;
   background-color: #00b2ff;
+  padding-bottom: 5%;
 }
 
 .content {
@@ -123,6 +124,7 @@ h1 {
   display: flex;
   flex-direction: row;
   gap: 5%;
+  margin-bottom: 3%;
 }
 
 .flex-box {
@@ -131,6 +133,12 @@ h1 {
 }
 
 .title {
-  margin-bottom: 30px;
+  text-align: left;
+  margin: 0 0 3%;
+}
+
+.show-more-info span {
+  font-size: 20px;
+  line-height: normal;
 }
 </style>
