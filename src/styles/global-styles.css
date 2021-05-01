@@ -58,8 +58,21 @@ button {
   border: 0;
 }
 
-a, button {
+a,
+button,
+.link {
   cursor: pointer;
+}
+
+/* Font styles  */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
 }
 
 /*END RESETS*/
