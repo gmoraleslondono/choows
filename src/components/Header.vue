@@ -44,8 +44,7 @@ export default {
 .btn-header {
   background: transparent;
   border: none;
-  margin: 20px;
-  font-size: 28px;
+  margin: 0 20px;
   color: white;
   cursor: pointer;
 }
