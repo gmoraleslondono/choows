@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import TvShowDetails from '../views/TvShowDetails.vue';
 import Favorites from '../views/Favorites.vue';
+import UpcomingEpisodes from '../views/UpcomingEpisodes.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/favorites',
     name: 'favorites',
     component: Favorites,
+  },
+  {
+    path: '/upcomingEpisodes',
+    name: 'upcomingEpisodes',
+    component: UpcomingEpisodes,
   },
 ];
 

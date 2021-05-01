@@ -2,7 +2,10 @@
   <div class="favorites">
     <Header />
     <div class="content">
-      <h1>My Favorites Shows</h1>
+      <div class="link-title">
+        <h1><u>My Favorites Shows</u></h1>
+        <h1 @click="goUpcomingEpisodes()">Upcoming Episodes</h1>
+      </div>
       <div
         class="tv-shows-container"
         v-for="(tvShow, index) in list"
@@ -107,6 +110,13 @@ export default {
 .content {
   width: 80%;
   margin: 0 auto;
+}
+
+.link-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5% 0;
 }
 
 h1 {
