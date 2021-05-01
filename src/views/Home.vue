@@ -86,7 +86,6 @@ export default {
       this.showName = '';
     },
     showDetails(selectedShow) {
-      console.log('selectedShow', selectedShow);
       this.$router.push({
         name: 'tvShowDetails',
         path: '/show',
@@ -112,6 +111,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/global-styles.css';
+
 .home {
   width: 100%;
   margin: 0 auto;
@@ -121,20 +122,20 @@ export default {
 
 .search-container {
   width: 60%;
-  margin: 5% auto;
+  margin: 4% auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 input {
   width: 60%;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .btn-search {
   width: 30%;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .form-search {
@@ -165,8 +166,6 @@ input {
 .content {
   display: flex;
   flex-direction: column;
-  font-size: 20px;
-  color: white;
   margin: 5% 0;
 }
 
@@ -178,9 +177,5 @@ input {
 
 img {
   min-height: 295px;
-}
-
-.link {
-  cursor: pointer;
 }
 </style>

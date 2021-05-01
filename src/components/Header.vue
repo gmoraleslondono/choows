@@ -27,6 +27,8 @@ export default {
 </script>
 
 <style>
+@import '../styles/global-styles.css';
+
 .header {
   width: 100%;
   margin: 0 auto;
@@ -44,8 +46,8 @@ export default {
 .btn-header {
   background: transparent;
   border: none;
-  margin: 20px;
-  font-size: 28px;
+  margin: 0 20px;
+  font-size: 2rem;
   color: white;
   cursor: pointer;
 }

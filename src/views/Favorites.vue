@@ -10,12 +10,14 @@
       >
         <div class="flex-box">
           <img
+            class="link"
             :src="`${
               tvShow.image
                 ? tvShow.image.medium
                 : require('@/assets/no-image-placeholder.jpg')
             }`"
             alt="TV show image"
+            @click="showDetails(tvShow)"
           />
           <Button
             :text="'Remove'"
@@ -24,19 +26,20 @@
           />
         </div>
         <div>
-          <h1 class="title">{{ tvShow.name }}</h1>
-          <div>
+          <h1 class="title link" @click="showDetails(tvShow)">
+            <u>{{ tvShow.name }}</u>
+          </h1>
+          <div class="show-more-info">
             <span>Rating: {{ tvShow.rating.average }}</span>
-            <span>Type: {{ tvShow.type }}</span>
             <span style="display: flex">
-              Genres:
+              Schedule:
               <div class="genre-list">
                 <div
-                  v-for="(genre, index) in tvShow.genres"
+                  v-for="(day, index) in tvShow.schedule.days"
                   :key="index"
                   style="margin-right: 5px"
                 >
-                  {{ genre }}
+                  {{ day }}, {{ tvShow.schedule.time }}
                 </div>
               </div>
             </span>
@@ -81,16 +84,26 @@ export default {
     removeFavorite(tvShow) {
       this.removeFromFavorites(tvShow);
     },
+    showDetails(selectedShow) {
+      this.$router.push({
+        name: 'tvShowDetails',
+        path: '/show',
+        params: { selectedShow: selectedShow },
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
+@import '../styles/global-styles.css';
+
 .favorites {
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
   background-color: #00b2ff;
+  padding-bottom: 5%;
 }
 
 .content {
@@ -100,19 +113,17 @@ export default {
 
 h1 {
   text-align: center;
-  margin: 5% 0;
-  color: white;
+  margin: 4% 0;
 }
 
 .tv-shows-container {
   width: 80%;
   margin: 0 auto;
-  color: white;
-  font-size: 18px;
   text-align: left;
   display: flex;
   flex-direction: row;
   gap: 5%;
+  margin-bottom: 3%;
 }
 
 .flex-box {
@@ -121,6 +132,11 @@ h1 {
 }
 
 .title {
-  margin-bottom: 30px;
+  text-align: left;
+  margin: 0 0 3%;
+}
+
+.show-more-info span {
+  line-height: normal;
 }
 </style>
