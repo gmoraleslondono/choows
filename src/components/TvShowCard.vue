@@ -10,18 +10,14 @@
         }`"
         alt="TV show image"
       />
-      <Button
-        v-if="btnType === 'favorites'"
-        :text="'Add favorites'"
-        @click="addFavorites()"
-        style="width: 80%"
-      />
-      <Button
-        v-else-if="btnType === 'remove'"
-        :text="'Remove'"
-        @click="removeFavorites()"
-        style="width: 80%"
-      />
+      <div class="button-container">
+        <Button
+          v-if="favorites && isFavorite(tvShow)"
+          :text="'Remove favorite'"
+          @click="removeFavorite(tvShow)"
+        />
+        <Button v-else :text="'Add favorites'" @click="addFavorites(tvShow)" />
+      </div>
     </div>
     <div class="show-info">
       <h1 class="title">{{ tvShow.name }}</h1>
@@ -69,7 +65,7 @@
 
 <script>
 import Button from './Button.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TvShowCard',
@@ -83,6 +79,7 @@ export default {
   computed: {
     ...mapGetters({
       currentShow: 'currentShow',
+      favorites: 'favorites',
     }),
   },
   beforeMount() {
@@ -97,11 +94,20 @@ export default {
     await this.$store.dispatch('setCurrentShow', this.tvShow);
   },
   methods: {
-    addFavorites() {
-      console.log('Add to favorites');
+    ...mapActions(['addToFavorites', 'removeFromFavorites']),
+    addFavorites(selectedShow) {
+      this.addToFavorites(selectedShow);
     },
-    removeFavorites() {
-      console.log('Remove favorites');
+    isFavorite(show) {
+      const result = this.favorites.filter((element) => element.id === show.id);
+      if (result.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    removeFavorite(selectedShow) {
+      this.removeFromFavorites(selectedShow);
     },
   },
 };
