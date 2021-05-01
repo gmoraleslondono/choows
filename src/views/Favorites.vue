@@ -86,6 +86,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/global-styles.css';
+
 .favorites {
   width: 100%;
   min-height: 100vh;
@@ -100,14 +102,12 @@ export default {
 
 h1 {
   text-align: center;
-  margin: 5% 0;
-  color: white;
+  margin: 4% 0;
 }
 
 .tv-shows-container {
   width: 80%;
   margin: 0 auto;
-  color: white;
   font-size: 18px;
   text-align: left;
   display: flex;

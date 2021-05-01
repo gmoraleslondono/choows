@@ -43,6 +43,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/global-styles.css';
+
 .tv-show-details {
   width: 100%;
   min-height: 100vh;

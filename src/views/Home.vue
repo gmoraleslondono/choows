@@ -112,6 +112,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/global-styles.css';
+
 .home {
   width: 100%;
   margin: 0 auto;
@@ -134,7 +136,7 @@ input {
 
 .btn-search {
   width: 30%;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .form-search {
@@ -166,7 +168,6 @@ input {
   display: flex;
   flex-direction: column;
   font-size: 20px;
-  color: white;
   margin: 5% 0;
 }
 
@@ -178,9 +179,5 @@ input {
 
 img {
   min-height: 295px;
-}
-
-.link {
-  cursor: pointer;
 }
 </style>

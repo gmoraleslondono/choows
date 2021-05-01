@@ -14,11 +14,12 @@ export default {
 </script>
 
 <style>
+@import '../styles/global-styles.css';
+
 .footer {
   width: 100%;
   margin: 0 auto;
   background-color: #121212;
-  color: white;
   font-size: 18px;
   text-align: center;
   padding: 1%;
