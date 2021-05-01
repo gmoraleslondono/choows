@@ -1,7 +1,9 @@
 <template>
   <div class="tv-show-details">
     <Header />
+    <div class="content">
     <TvShowCard :btnType="'favorites'" :tvShowDetails="tvShow" />
+    </div>
     <Footer />
   </div>
 </template>
@@ -46,5 +48,9 @@ export default {
   min-height: 100vh;
   margin: 0 auto;
   background-color: #8acb88;
+}
+
+.content {
+  margin-top: 4%;
 }
 </style>
