@@ -29,9 +29,9 @@
             <u>{{ tvShow.name }}</u>
           </h1>
           <div class="show-more-info">
-            <span>Rating: {{ tvShow.rating.average }}</span>
+            <span><b>Rating: </b>{{ tvShow.rating.average }}</span>
             <span style="display: flex">
-              Schedule:
+              <b>Schedule:</b>
               <div class="genre-list">
                 <div
                   v-for="(day, index) in tvShow.schedule.days"
@@ -43,7 +43,7 @@
               </div>
             </span>
             <span class="summary">
-              Summary: <span v-html="tvShow.summary"></span>
+              <b>Summary: </b><span v-html="tvShow.summary"></span>
             </span>
           </div>
         </div>
@@ -175,6 +175,10 @@ h1 {
   .summary {
     display: none;
   }
+
+  h1 {
+    font-size: 2rem;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -192,8 +196,8 @@ h1 {
   }
 
   h1 {
-    margin: 15% 0;
-    font-size: 1.8rem;
+    margin: 5% 0 10%;
+    font-size: 1rem;
   }
 
   .title {
@@ -202,6 +206,10 @@ h1 {
 
   .show-more-info span {
     font-size: 0.9rem;
+  }
+
+  .link-title {
+    color: black;
   }
 }
 </style>

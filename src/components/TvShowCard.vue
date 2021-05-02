@@ -161,6 +161,12 @@ export default {
   margin-left: 10px;
 }
 
+@media screen and (max-width: 1024px) {
+  .tv-show-card {
+    width: 90%;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .content {
     margin-top: 15%;
@@ -168,21 +174,27 @@ export default {
 
   .tv-show-card {
     flex-direction: column;
-    width: 80%;
+    width: 85%;
     padding-bottom: 20%;
   }
 
   .flex-box {
-    width: 100%;
+    width: 75%;
+    margin: 0 auto;
   }
 
-  .show-info[data-v-56d5a202] {
+  .show-info {
     width: 100%;
   }
 
   .title {
     text-align: center;
     font-size: 2rem;
+  }
+
+  .show-info-details {
+    gap: 10px;
+    font-size: 1rem;
   }
 }
 </style>
