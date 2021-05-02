@@ -2,11 +2,15 @@
 
 [![GitHub license](https://img.shields.io/github/license/gmoraleslondono/todoly.svg)](https://github.com/gmoraleslondono/todoly/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
 
-The app allows the user to search TV shows by name, they can see more details about an specific show and add or remove shows from favorite list.
+Users can search TV shows by name, see details such as rating, summary, etc. And save their favorite shows for later to see upcoming episodes.
+
+## Design (Figma)
+
+https://www.figma.com/file/oJz4fk0U8hogJJRuzInjGI/choows
 
 ## 🏆 The goal
 
-The program is a Vue.js web application integrated with TVmaze Public REST API. It was built using a central store to share data Vuex,js, using reusable components (ex: header, footer, etc) and different views connected each other.
+It is a web application integrated with TV Maze public REST API. It was built using Vue.js and a central store to share data Vuex, using reusable components (ex: header, footer, etc) and different views connected each other.
 
 At the top page there is two buttons that route to home view and favorites view, allowing the user navigate through the web application.
 
@@ -18,11 +22,9 @@ In the TV show details view the user can add or remove from favorite list clicki
 
 In the favorites view the user can find a list with all their favorite shows, it also contains some details about each TV show. The user can remove shows from the list clicking in the button remove.
 
-Find the prototype here: [TV show design.](https://www.figma.com/file/oJz4fk0U8hogJJRuzInjGI/tv_shows?node-id=0%3A1)
-
 ## 🚧 Future improvements
 
-See the [project board](https://github.com/gmoraleslondono/tv-shows/projects/1?add_cards_query=is%3Aopen) whit future improvements, issues and other tasks.
+See the project board with future improvements, issues and other tasks: https://github.com/gmoraleslondono/choows/projects/1
 
 ## 🛠 Technologies used and tools
 
