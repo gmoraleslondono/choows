@@ -2,7 +2,10 @@
   <div class="favorites">
     <Header />
     <div class="content">
-      <h1>My Favorites Shows</h1>
+      <div class="link-title">
+        <h1 class="link"><u>My Favorites Shows</u></h1>
+        <h1 class="link" @click="goUpcomingEpisodes()">Upcoming Episodes</h1>
+      </div>
       <div
         class="tv-shows-container"
         v-for="(tvShow, index) in list"
@@ -69,6 +72,7 @@ export default {
   computed: {
     ...mapGetters(['favorites']),
     list() {
+      // if favorites in the store is empty get favorites from store
       if (this.favorites && this.favorites.length > 0) {
         return this.favorites;
       } else if (localStorage.getItem('favoritesList')) {
@@ -77,10 +81,14 @@ export default {
       return [];
     },
   },
+  mounted() {
+    this.getUpcomingEpisodes();
+  },
   methods: {
-    ...mapActions(['removeFromFavorites']),
+    ...mapActions(['removeFromFavorites', 'getShowsUpcomingEpisodes']),
     removeFavorite(tvShow) {
       this.removeFromFavorites(tvShow);
+      this.getUpcomingEpisodes();
     },
     showDetails(selectedShow) {
       this.$router.push({
@@ -88,6 +96,20 @@ export default {
         path: '/show',
         params: { selectedShow: selectedShow },
       });
+    },
+    getUpcomingEpisodes() {
+      // if favorites in the store is empty get favorites from store
+      if (this.favorites && this.favorites.length > 0) {
+        this.getShowsUpcomingEpisodes(this.favorites);
+      } else if (localStorage.getItem('favoritesList')) {
+        this.getShowsUpcomingEpisodes(
+          JSON.parse(localStorage.getItem('favoritesList'))
+        );
+      }
+    },
+    goUpcomingEpisodes() {
+      this.getUpcomingEpisodes();
+      this.$router.push('/upcoming');
     },
   },
 };
@@ -107,6 +129,13 @@ export default {
 .content {
   width: 80%;
   margin: 0 auto;
+}
+
+.link-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5% 0;
 }
 
 h1 {
