@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
     showSearchList: [],
     currentShow: null,
     favorites: [],
+    upcomingEpisodes: [],
   },
 
   getters: {
@@ -24,6 +25,9 @@ export const store = new Vuex.Store({
     },
     favorites: (state) => {
       return state.favorites;
+    },
+    upcomingEpisodes: (state) => {
+      return state.upcomingEpisodes;
     },
   },
 
@@ -43,7 +47,7 @@ export const store = new Vuex.Store({
             },
           })
           .then((response) => {
-            console.log('result  by search', response.data);
+            // filter shows that contain information
             state.showSearchList = response.data.filter(function (show) {
               return show.show.image !== null;
             });
@@ -62,6 +66,47 @@ export const store = new Vuex.Store({
     removeFromFavorites({ commit }, data) {
       commit('removeFromFavorites', data);
     },
+    getShowsUpcomingEpisodes({ state }, favorites) {
+      const idShowList = favorites.map((show) => show.id);
+
+      console.log('state.favorites', state.favorites);
+      console.log('idShowList', idShowList);
+
+      const PromiseArr = [];
+      for (let i = 0; i < idShowList.length; i++) {
+        PromiseArr.push(
+          axios
+            .get(`https://api.tvmaze.com/shows/${idShowList[i]}?`, {
+              params: {
+                embed: 'nextepisode',
+                // embed: 'episodes',
+              },
+            })
+            .then((result) => new Promise((resolve) => resolve(result.data)))
+        );
+      }
+
+      // Promise.all return the response from all the requests once all of them are successful
+      Promise.all(PromiseArr).then((res) => {
+        console.log('res', res);
+
+        // get tv shows with upcoming episodes
+        const showsWithUpcomingEpisodes = res.filter((show) =>
+          Boolean(show._embedded)
+        );
+
+        // order by date
+        const showsOrdered = showsWithUpcomingEpisodes.sort(
+          (a, b) =>
+            new Date(a._embedded.nextepisode.airdate) -
+            new Date(b._embedded.nextepisode.airdate)
+        );
+
+        state.upcomingEpisodes = showsOrdered;
+
+        console.log('state.upcomingEpisodes', state.upcomingEpisodes);
+      });
+    },
   },
 
   mutations: {
@@ -69,7 +114,6 @@ export const store = new Vuex.Store({
       state.shows = shows;
     },
     setResultSearch(state, data) {
-      state.error = false;
       state.showSearchList = data;
     },
     setCurrentShow: (state, data) => {
@@ -107,6 +151,9 @@ export const store = new Vuex.Store({
 
       // saving favorite list to local storage
       localStorage.setItem('favoritesList', JSON.stringify(state.favorites));
+    },
+    setUpcomingEpisodes(state, data) {
+      state.upcomingEpisodes = data;
     },
   },
 });
