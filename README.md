@@ -10,17 +10,15 @@ https://www.figma.com/file/oJz4fk0U8hogJJRuzInjGI/choows
 
 ## 🏆 The goal
 
-It is a web application integrated with TV Maze public REST API. It was built using Vue.js and a central store to share data Vuex, using reusable components (ex: header, footer, etc) and different views connected each other.
+It is a web application integrated with TV Maze public REST API. It was built using Vue.js and a central store to share data Vuex, using reusable components (e.g. header, footer, etc.) and different views connected.
 
-At the top of the page there is a menu that allows the user navigate through the web application.
+At the top of the page, there is a menu that allows the user to navigate through the web application.
 
-At the home page the user can find an input field were they can type the show name, or a part of the show name, clicking the button search or pressing enter the user can see a show list with all the possible matches.
-The user can add or remove from the favorite list clicking in the button under the image.
+At the home page, the user can find an input field where they can type the show name, or a part of the show name, clicking the button search or pressing enter the user can see a show list with all the possible matches. The user can add or remove from the favorite list by clicking on the button under the image.
 
-The user can read more details about one specific show clicking over the picture, or over the TV show name.
-In the TV show details page the user can add or remove from favorite list clicking in the button under the image.
+The user can read more details about one specific show by clicking over the picture, or over the TV show name. On the TV show details page, the user can add or remove from the favorite list by clicking on the button under the image.
 
-In the favorites page the user can find a list with all their favorite shows, it also contains some details about each TV show. The user can remove shows from the list clicking in the button remove.
+On the favorites page, the user can find a list with all their favorite shows, it also contains some details about each TV show. The user can remove shows from the list by clicking on the button remove.
 
 ## 🚧 Future improvements
 
