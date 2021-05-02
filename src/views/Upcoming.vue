@@ -25,16 +25,29 @@
         </div>
         <div class="show-more-info">
           <h1 class="title">{{ tvShow.name }}</h1>
-          <div class="flex-box">
+          <div>
             <span
               >S.{{ tvShow._embedded.nextepisode.season }} E.{{
                 tvShow._embedded.nextepisode.number
               }}
-              {{ tvShow._embedded.nextepisode.name }}</span
+              <b>{{ tvShow._embedded.nextepisode.name }}</b></span
             >
-            <span>Date: {{ tvShow._embedded.nextepisode.airdate }}</span>
-            <span> Time: {{ tvShow._embedded.nextepisode.airtime }}</span>
-            <span v-html="tvShow._embedded.nextepisode.summary"></span>
+            <div>
+              <span
+                ><b>Date: </b>{{ tvShow._embedded.nextepisode.airdate }}</span
+              >
+            </div>
+            <div>
+              <span
+                ><b>Time: </b>{{ tvShow._embedded.nextepisode.airtime }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="summary"
+                v-html="tvShow._embedded.nextepisode.summary"
+              ></span>
+            </div>
           </div>
         </div>
       </div>
@@ -118,5 +131,38 @@ h1 {
 
 .show-more-info span {
   line-height: normal;
+}
+
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .tv-shows-container {
+    width: 100%;
+  }
+
+  h1 {
+    margin: 5% 0 10%;
+    font-size: 1rem;
+  }
+
+  .flex-box {
+    width: 30%;
+  }
+
+  .show-more-info span {
+    font-size: 0.8rem;
+  }
+
+  .link-title {
+    color: black;
+  }
+
+  .summary {
+    display: none;
+  }
 }
 </style>

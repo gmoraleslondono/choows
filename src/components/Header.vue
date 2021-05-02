@@ -1,10 +1,15 @@
 <template>
   <div class="header">
     <div class="header-content">
-      <button class="btn-header" @click="goHome()">Home</button>
-      <button class="btn-header" @click="goFavorites()">
-        My Favorite shows
-      </button>
+      <div>
+        <button class="btn-header" @click="goHome()"><h1>Choows</h1></button>
+      </div>
+      <div class="menu">
+        <button class="btn-header border" @click="goHome()">Home</button>
+        <button class="btn-header border" @click="goFavorites()">
+          Favorites
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -39,28 +44,54 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-top: 3%;
 }
 
 .btn-header {
   background: transparent;
   border: none;
-  margin: 0 20px;
+  margin: 0 40px;
   font-size: 2rem;
   color: white;
   cursor: pointer;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 1024px) {
   .header-content {
-    width: 81%;
+    width: 80%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10%;
+    gap: 5%;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .btn-header {
+    margin: 0;
+  }
+
+  .border {
     border: 1px solid white;
     border-radius: 10px;
     padding: 5px 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .header-content {
+    width: 90%;
+  }
+
+  .btn-header {
     font-size: 1.2rem;
   }
 }
