@@ -32,7 +32,7 @@ https://github.com/gmoraleslondono/choows/projects/1
 ### Prerequisites
 
 - Node.js 12.x or newer
-- Npm 6.x or newer
+- npm 6.x or newer
 - Vue CLI
 
 ### Technologies
