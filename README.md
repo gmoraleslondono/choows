@@ -20,6 +20,8 @@ The user can read more details about one specific show by clicking over the pict
 
 On the favorites page, the user can find a list with all their favorite shows, it also contains some details about each TV show. The user can remove shows from the list by clicking on the button remove.
 
+The upcoming episodes page, contains the favorites TV shows upcoming episodes ordered chronologically.
+
 ## 🚧 Future improvements
 
 Check the project board for future improvements, ideas and bugs:<br>
