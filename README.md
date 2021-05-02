@@ -8,7 +8,7 @@ Users can search TV shows by name, see details such as rating, summary, etc. And
 
 https://www.figma.com/file/oJz4fk0U8hogJJRuzInjGI/choows
 
-## ✅ Requirements
+## 🏆 The goal
 
 It is a web application integrated with TV Maze public REST API. It was built using Vue.js and a central store to share data Vuex, using reusable components (ex: header, footer, etc) and different views connected each other.
 
