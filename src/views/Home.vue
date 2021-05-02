@@ -194,7 +194,7 @@ img {
 @media screen and (max-width: 450px) {
   .search-container {
     width: 100%;
-    margin: 15% 0;
+    margin: 10% 0;
     flex-direction: column;
     align-items: center;
     gap: 20px;
