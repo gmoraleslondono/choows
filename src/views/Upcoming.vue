@@ -1,5 +1,5 @@
 <template>
-  <div class="upcoming-episodes">
+  <div class="upcoming">
     <Header />
     <div class="content">
       <div class="link-title">
@@ -62,7 +62,7 @@ import Header from '../components/Header.vue';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'UpcomingEpisodes',
+  name: 'Upcoming',
   components: {
     Header,
     Footer,
@@ -84,7 +84,7 @@ export default {
 <style scoped>
 @import '../styles/global-styles.css';
 
-.upcoming-episodes {
+.upcoming {
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
