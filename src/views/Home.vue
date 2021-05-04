@@ -67,12 +67,17 @@ export default {
     Button,
   },
   data() {
+    const initialSearch = this.$route.query.search;
+
     return {
-      showName: '',
+      showName: initialSearch || '',
     };
   },
   computed: {
     ...mapGetters(['resultList', 'favorites']),
+  },
+  mounted() {
+    this.search();
   },
   methods: {
     ...mapActions([
@@ -81,9 +86,10 @@ export default {
       'removeFromFavorites',
     ]),
     search() {
-      const userInput = this.showName;
-      this.getShowsSearchList(userInput);
-      this.showName = '';
+      if (this.showName) {
+        this.$router.push({ query: { search: this.showName } });
+        this.getShowsSearchList(this.showName);
+      }
     },
     showDetails(selectedShow) {
       this.$router.push({
