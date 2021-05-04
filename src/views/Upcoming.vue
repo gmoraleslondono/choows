@@ -3,10 +3,10 @@
     <Header />
     <div class="content">
       <div class="link-title">
-        <h1 class="link" @click="$router.push('/favorites')">
+        <h1 class="link inactive" @click="$router.push('/favorites')">
           My Favorites Shows
         </h1>
-        <h1 class="link"><u>Upcoming Episodes</u></h1>
+        <h1 class="link active">Upcoming Episodes</h1>
       </div>
       <div
         class="tv-shows-container"
@@ -132,9 +132,17 @@ h1 {
   line-height: normal;
 }
 
+.active {
+  border-bottom: 2px solid white;
+}
+
 @media screen and (max-width: 1024px) {
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .link-title {
+    margin-bottom: 3%;
   }
 }
 
@@ -148,8 +156,9 @@ h1 {
   }
 
   h1 {
-    margin: 5% 0 10%;
-    font-size: 1rem;
+    width: 50%;
+    padding: 0 2%;
+    font-size: 1.3rem;
   }
 
   .flex-box {
@@ -160,12 +169,23 @@ h1 {
     font-size: 0.8rem;
   }
 
-  .link-title {
-    color: black;
-  }
-
   .summary {
     display: none;
+  }
+
+  .link-title {
+    border-bottom: 1px solid white;
+    margin-bottom: 10%;
+  }
+
+  h1.active {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 1rem;
   }
 }
 </style>
