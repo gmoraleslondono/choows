@@ -20,7 +20,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   background-color: #121212;
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
   padding: 1%;
   position: fixed;

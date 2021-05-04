@@ -52,7 +52,7 @@ export default {
   background: transparent;
   border: none;
   margin: 0 40px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: white;
   cursor: pointer;
 }

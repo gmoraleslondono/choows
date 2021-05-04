@@ -108,6 +108,7 @@ export default {
   display: flex;
   flex-direction: row;
   gap: 5%;
+  padding-bottom: 5%;
 }
 
 .flex-box {
@@ -175,6 +176,7 @@ export default {
   .title {
     text-align: center;
     font-size: 2rem;
+    margin: 5% 0 0;
   }
 
   .show-info-details {

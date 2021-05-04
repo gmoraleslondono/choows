@@ -133,7 +133,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 5% 0;
 }
 
 h1 {
@@ -180,6 +179,10 @@ h1 {
 }
 
 @media screen and (max-width: 450px) {
+  .favorites {
+    padding-bottom: 15%;
+  }
+
   .tv-shows-container {
     width: 100%;
   }
