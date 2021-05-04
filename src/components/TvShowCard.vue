@@ -69,7 +69,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TvShowCard',
-  props: ['btnType', 'tvShowDetails'],
   components: {
     Button,
   },
@@ -77,21 +76,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters({
-      currentShow: 'currentShow',
-      favorites: 'favorites',
-    }),
-  },
-  beforeMount() {
-    this.tvShow = this.$route.params.selectedShow;
-    if (this.tvShow) {
-      this.$store.dispatch('setCurrentShow', this.tvShow);
-    } else {
-      this.tvShow = this.currentShow;
-    }
-  },
-  async mounted() {
-    await this.$store.dispatch('setCurrentShow', this.tvShow);
+    ...mapGetters(['tvShow', 'favorites']),
   },
   methods: {
     ...mapActions(['addToFavorites', 'removeFromFavorites']),

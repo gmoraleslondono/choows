@@ -2,7 +2,7 @@
   <div class="tv-show-details">
     <Header />
     <div class="content">
-      <TvShowCard :btnType="'favorites'" :tvShowDetails="tvShow" />
+      <TvShowCard />
     </div>
     <Footer />
   </div>
@@ -12,7 +12,7 @@
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import TvShowCard from '../components/TvShowCard.vue';
-import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'TvShowDetails',
@@ -21,23 +21,14 @@ export default {
     Footer,
     TvShowCard,
   },
-  data() {
-    return {
-      tvShow: null,
-    };
-  },
-  computed: {
-    ...mapGetters({
-      currentShow: 'currentShow',
-    }),
-  },
   beforeMount() {
-    this.tvShow = this.$route.params.selectedShow;
-    if (this.tvShow) {
-      this.$store.dispatch('setCurrentShow', this.tvShow);
-    } else {
-      this.tvShow = this.currentShow;
+    this.showId = this.$route.params.id;
+    if (this.showId) {
+      this.getShowById(this.showId);
     }
+  },
+  methods: {
+    ...mapActions(['getShowById']),
   },
 };
 </script>
