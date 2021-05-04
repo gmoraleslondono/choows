@@ -70,11 +70,8 @@ export const store = new Vuex.Store({
     removeFromFavorites({ commit }, data) {
       commit('removeFromFavorites', data);
     },
-    getShowsUpcomingEpisodes({ commit, state }, favorites) {
+    getShowsUpcomingEpisodes({ commit }, favorites) {
       const idShowList = favorites.map((show) => show.id);
-
-      console.log('state.favorites', state.favorites);
-      console.log('idShowList', idShowList);
 
       const PromiseArr = [];
       for (let i = 0; i < idShowList.length; i++) {
@@ -92,8 +89,6 @@ export const store = new Vuex.Store({
 
       // Promise.all return the response from all the requests once all of them are successful
       Promise.all(PromiseArr).then((res) => {
-        console.log('res', res);
-
         // get tv shows with upcoming episodes
         const showsWithUpcomingEpisodes = res.filter((show) =>
           Boolean(show._embedded)
