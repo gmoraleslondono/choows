@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'StandardButton',
+  name: 'Button',
   props: {
     text: String,
   },
@@ -29,7 +29,7 @@ export default {
   border-radius: 10px;
   width: 100%;
   margin: 20px auto;
-  font-size: 1.3rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 </style>

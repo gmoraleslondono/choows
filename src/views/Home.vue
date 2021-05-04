@@ -134,12 +134,12 @@ export default {
 
 input {
   width: 60%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .btn-search {
   width: 30%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .form-search {
@@ -157,6 +157,7 @@ input {
   flex-wrap: wrap;
   gap: 5%;
   align-items: baseline;
+  padding-bottom: 5%;
 }
 
 .show-preview {
@@ -214,6 +215,7 @@ img {
 
   .show-preview {
     width: 80%;
+    margin-bottom: 15%;
   }
 
   input,

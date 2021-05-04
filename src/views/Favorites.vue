@@ -3,7 +3,7 @@
     <Header />
     <div class="content">
       <div class="link-title">
-        <h1 class="link"><u>My Favorites Shows</u></h1>
+        <h1 class="link active">My Favorites Shows</h1>
         <h1 class="link" @click="goUpcomingEpisodes()">Upcoming Episodes</h1>
       </div>
       <div
@@ -133,7 +133,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 5% 0;
 }
 
 h1 {
@@ -169,17 +168,29 @@ h1 {
   width: 80%;
 }
 
+.active {
+  border-bottom: 2px solid white;
+}
+
 @media screen and (max-width: 1024px) {
   .summary {
     display: none;
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .link-title {
+    margin-bottom: 3%;
   }
 }
 
 @media screen and (max-width: 450px) {
+  .favorites {
+    padding-bottom: 15%;
+  }
+
   .tv-shows-container {
     width: 100%;
   }
@@ -193,21 +204,29 @@ h1 {
     width: 100%;
   }
 
-  h1 {
-    margin: 5% 0 10%;
-    font-size: 1rem;
+  .link-title {
+    border-bottom: 1px solid white;
+    margin-bottom: 10%;
   }
 
-  .title {
+  h1.active {
+    margin-bottom: 0;
+  }
+
+  h1 {
+    width: 50%;
+    padding: 0 2%;
     font-size: 1.3rem;
   }
 
   .show-more-info span {
     font-size: 0.9rem;
   }
+}
 
-  .link-title {
-    color: black;
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 1rem;
   }
 }
 </style>
