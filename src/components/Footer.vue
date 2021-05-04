@@ -26,4 +26,10 @@ export default {
   position: fixed;
   bottom: 0;
 }
+
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 5%;
+  }
+}
 </style>
