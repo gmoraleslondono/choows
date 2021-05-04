@@ -14,8 +14,8 @@ const routes = [
     component: Home,
   },
   {
-    path: '/show',
-    name: 'tvShowDetails',
+    path: '/show/:id',
+    name: 'show',
     component: TvShowDetails,
   },
   {
@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: '/upcoming',
-    name: 'Upcoming',
+    name: 'upcoming',
     component: Upcoming,
   },
 ];

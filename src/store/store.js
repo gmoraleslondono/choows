@@ -4,24 +4,26 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
+const TV_MAZE_BASE_URL = 'https://api.tvmaze.com';
+
 export const store = new Vuex.Store({
   state: {
+    tvShow: null,
     shows: [],
     showSearchList: [],
-    currentShow: null,
     favorites: [],
     upcomingEpisodes: [],
   },
 
   getters: {
-    items: (state) => {
+    tvShow: (state) => {
+      return state.tvShow;
+    },
+    shows: (state) => {
       return state.shows;
     },
     resultList: (state) => {
       return state.showSearchList;
-    },
-    currentShow: (state) => {
-      return state.currentShow;
     },
     favorites: (state) => {
       return state.favorites;
@@ -32,6 +34,11 @@ export const store = new Vuex.Store({
   },
 
   actions: {
+    getShowById({ commit }, id) {
+      axios.get(`${TV_MAZE_BASE_URL}/shows/${id}`).then((response) => {
+        commit('setTvShow', response.data);
+      });
+    },
     getShows({ commit }) {
       axios.get('https://api.tvmaze.com/shows?page=0').then((response) => {
         console.log('response', response);
@@ -57,16 +64,13 @@ export const store = new Vuex.Store({
         console.log(error);
       }
     },
-    setCurrentShow: ({ commit }, data) => {
-      commit('setCurrentShow', data);
-    },
     addToFavorites({ commit }, data) {
       commit('setToFavorites', data);
     },
     removeFromFavorites({ commit }, data) {
       commit('removeFromFavorites', data);
     },
-    getShowsUpcomingEpisodes({ state }, favorites) {
+    getShowsUpcomingEpisodes({ commit, state }, favorites) {
       const idShowList = favorites.map((show) => show.id);
 
       console.log('state.favorites', state.favorites);
@@ -102,22 +106,20 @@ export const store = new Vuex.Store({
             new Date(b._embedded.nextepisode.airdate)
         );
 
-        state.upcomingEpisodes = showsOrdered;
-
-        console.log('state.upcomingEpisodes', state.upcomingEpisodes);
+        commit('setUpcomingEpisodes', showsOrdered);
       });
     },
   },
 
   mutations: {
+    setTvShow(state, show) {
+      state.tvShow = show;
+    },
     setShows(state, shows) {
       state.shows = shows;
     },
     setResultSearch(state, data) {
       state.showSearchList = data;
-    },
-    setCurrentShow: (state, data) => {
-      state.currentShow = data;
     },
     setToFavorites(state, show) {
       let allFavoritesList = [];

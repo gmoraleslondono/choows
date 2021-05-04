@@ -87,9 +87,7 @@ export default {
     },
     showDetails(selectedShow) {
       this.$router.push({
-        name: 'tvShowDetails',
-        path: '/show',
-        params: { selectedShow: selectedShow },
+        path: `/show/${selectedShow.id}`,
       });
     },
     addFavorites(selectedShow) {
