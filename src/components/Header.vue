@@ -57,6 +57,10 @@ export default {
   cursor: pointer;
 }
 
+.home .btn-header {
+  color: black;
+}
+
 @media screen and (max-width: 1024px) {
   .header-content {
     width: 80%;

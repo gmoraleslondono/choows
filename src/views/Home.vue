@@ -131,6 +131,7 @@ export default {
   margin: 0 auto;
   background-color: orange;
   min-height: 100vh;
+  color: black;
 }
 
 .search-container {
