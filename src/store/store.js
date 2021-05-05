@@ -78,19 +78,17 @@ export const store = new Vuex.Store({
           console.error(error);
         });
     },
-    getShowsSearchList({ commit }, searchText) {
-      axios
-        .get(`${TV_MAZE_BASE_URL}/search/shows?`, {
+    async getShowsSearchList({ commit }, searchText) {
+      try {
+        const response = await axios.get(`${TV_MAZE_BASE_URL}/search/shows?`, {
           params: {
             q: searchText.trim(),
           },
-        })
-        .then((response) => {
-          commit('setResultSearch', response.data);
-        })
-        .catch((error) => {
-          console.error(error);
         });
+        commit('setResultSearch', response.data);
+      } catch (error) {
+        console.error(error);
+      }
     },
     addToFavorites({ commit }, data) {
       commit('setToFavorites', data);

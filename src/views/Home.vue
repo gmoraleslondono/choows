@@ -99,9 +99,9 @@ export default {
       'addToFavorites',
       'removeFromFavorites',
     ]),
-    search() {
+    async search() {
       if (this.showName) {
-        this.getShowsSearchList(this.showName);
+        await this.getShowsSearchList(this.showName);
         this.searchDidHappen = true;
       }
     },
