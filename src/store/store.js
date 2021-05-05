@@ -69,7 +69,7 @@ export const store = new Vuex.Store({
     },
     getShows({ commit }) {
       axios
-        .get('https://api.tvmaze.com/shows?page=0')
+        .get(`${TV_MAZE_BASE_URL}/shows?page=0`)
         .then((response) => {
           console.log('response', response);
           commit('setShows', response.data);
@@ -80,7 +80,7 @@ export const store = new Vuex.Store({
     },
     getShowsSearchList({ commit }, searchText) {
       axios
-        .get('https://api.tvmaze.com/search/shows?', {
+        .get(`${TV_MAZE_BASE_URL}/search/shows?`, {
           params: {
             q: searchText.trim(),
           },
@@ -107,7 +107,7 @@ export const store = new Vuex.Store({
       for (let i = 0; i < idShowList.length; i++) {
         PromiseArr.push(
           axios
-            .get(`https://api.tvmaze.com/shows/${idShowList[i]}?`, {
+            .get(`${TV_MAZE_BASE_URL}/shows/${idShowList[i]}?`, {
               params: {
                 embed: 'nextepisode',
                 // embed: 'episodes',
