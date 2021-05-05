@@ -14,7 +14,11 @@
       <button class="btn-search form-search" @click="search()">Search</button>
     </div>
     <div class="show-cards-container">
+      <div v-if="searchDidHappen && resultList.length === 0">
+        Your search did not match any show.
+      </div>
       <div
+        v-else
         v-for="(result, index) in resultList"
         :key="index"
         class="show-preview"
@@ -33,7 +37,7 @@
           <h3 class="link" @click="showDetails(result.show)">
             <u>{{ result.show.name }}</u>
           </h3>
-          <span>Rating: {{ result.show.rating.average }}</span>
+          <span>Rating: {{ result.show.rating.average || 'Unknown' }}</span>
         </div>
         <div class="button-container">
           <Button
@@ -71,6 +75,7 @@ export default {
 
     return {
       showName: initialSearch || '',
+      searchDidHappen: false,
     };
   },
   computed: {
@@ -78,6 +83,15 @@ export default {
   },
   mounted() {
     this.search();
+  },
+  watch: {
+    showName: function (newShowName, oldShowname) {
+      if (newShowName.trim() !== oldShowname.trim()) {
+        this.$router.push({
+          query: { search: newShowName.trim() || undefined },
+        });
+      }
+    },
   },
   methods: {
     ...mapActions([
@@ -87,8 +101,8 @@ export default {
     ]),
     search() {
       if (this.showName) {
-        this.$router.push({ query: { search: this.showName } });
         this.getShowsSearchList(this.showName);
+        this.searchDidHappen = true;
       }
     },
     showDetails(selectedShow) {

@@ -68,24 +68,19 @@ export const store = new Vuex.Store({
         commit('setShows', response.data);
       });
     },
-    async getShowsSearchList({ commit, state }, searchText) {
-      try {
-        await axios
-          .get('https://api.tvmaze.com/search/shows?', {
-            params: {
-              q: searchText,
-            },
-          })
-          .then((response) => {
-            // filter shows that contain information
-            state.showSearchList = response.data.filter(function (show) {
-              return show.show.image !== null;
-            });
-            commit('setResultSearch', state.showSearchList);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+    getShowsSearchList({ commit }, searchText) {
+      axios
+        .get('https://api.tvmaze.com/search/shows?', {
+          params: {
+            q: searchText.trim(),
+          },
+        })
+        .then((response) => {
+          commit('setResultSearch', response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     addToFavorites({ commit }, data) {
       commit('setToFavorites', data);
