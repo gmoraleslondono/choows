@@ -89,11 +89,35 @@ export const store = new Vuex.Store({
         console.error(error);
       }
     },
-    addToFavorites({ commit }, data) {
-      commit('setToFavorites', data);
+    addToFavorites({ commit }, show) {
+      let favoritesList;
+      try {
+        favoritesList = JSON.parse(localStorage.getItem('favoritesList')) || [];
+      } catch (error) {
+        favoritesList = [];
+      }
+      favoritesList.push(show);
+      // saving favorite list to local storage
+      localStorage.setItem('favoritesList', JSON.stringify(favoritesList));
+
+      commit('setToFavorites', favoritesList);
     },
-    removeFromFavorites({ commit }, data) {
-      commit('removeFromFavorites', data);
+    removeFromFavorites({ commit }, show) {
+      let favoritesList;
+      try {
+        favoritesList = JSON.parse(localStorage.getItem('favoritesList')) || [];
+      } catch (error) {
+        favoritesList = [];
+      }
+
+      // create a new array excluding the element show.id
+      const newFavoriteList = favoritesList.filter(
+        (favorite) => favorite.id !== show.id
+      );
+      // saving favorite list to local storage
+      localStorage.setItem('favoritesList', JSON.stringify(newFavoriteList));
+
+      commit('setToFavorites', newFavoriteList);
     },
     getShowsUpcomingEpisodes({ commit }, favorites) {
       // create an array with favorite shows ids
@@ -147,38 +171,8 @@ export const store = new Vuex.Store({
     setResultSearch(state, data) {
       state.showSearchList = data;
     },
-    setToFavorites(state, show) {
-      let allFavoritesList = [];
-
-      const localData = JSON.parse(localStorage.getItem('favoritesList'));
-
-      if (localData !== null && localData.length > 0) {
-        allFavoritesList = localData;
-      }
-
-      allFavoritesList.push(show);
-
-      state.favorites = allFavoritesList;
-
-      // saving favorite list to local storage
-      localStorage.setItem(
-        'favoritesList',
-        JSON.stringify(this.state.favorites)
-      );
-    },
-    removeFromFavorites(state, data) {
-      let allFavoritesList = [];
-
-      const localData = JSON.parse(localStorage.getItem('favoritesList'));
-
-      if (localData !== null && localData.length > 0) {
-        allFavoritesList = localData;
-      }
-
-      state.favorites = allFavoritesList.filter((show) => show.id !== data.id);
-
-      // saving favorite list to local storage
-      localStorage.setItem('favoritesList', JSON.stringify(state.favorites));
+    setToFavorites(state, favorites) {
+      state.favorites = favorites;
     },
     setUpcomingEpisodes(state, data) {
       state.upcomingEpisodes = data;
