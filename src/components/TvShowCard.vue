@@ -30,7 +30,9 @@
         <div class="show-info-details">
           <div>
             <h3>Rating:</h3>
-            <span>{{ tvShow.rating.average }}</span>
+            <span>{{
+              (tvShow.rating && tvShow.rating.average) || 'Unknown'
+            }}</span>
           </div>
           <div>
             <h3>Type:</h3>
@@ -51,13 +53,13 @@
           <div>
             <h3>Schedule:</h3>
             <span>
-              {{ tvShow.schedule.days.join(', ') }} at
-              {{ tvShow.schedule.time }}
+              {{ tvShow.schedule && tvShow.schedule.days.join(', ') }} at
+              {{ tvShow.schedule && tvShow.schedule.time }}
             </span>
           </div>
           <div>
             <h3>Genres:</h3>
-            <span>{{ tvShow.genres.join(', ') }}</span>
+            <span>{{ tvShow.genres && tvShow.genres.join(', ') }}</span>
           </div>
           <div>
             <h3>Summary:</h3>
