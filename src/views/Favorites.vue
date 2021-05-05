@@ -13,7 +13,7 @@
       >
         <div class="flex-box">
           <img
-            class="link"
+            class="show-cover link"
             :src="`${
               tvShow.image
                 ? tvShow.image.medium
@@ -24,24 +24,17 @@
           />
           <Button :text="'Remove'" @click="removeFavorite(tvShow)" />
         </div>
-        <div>
+        <div class="show-info">
           <h1 class="title link" @click="showDetails(tvShow)">
             <u>{{ tvShow.name }}</u>
           </h1>
           <div class="show-more-info">
-            <span><b>Rating: </b>{{ tvShow.rating.average }}</span>
-            <span style="display: flex">
-              <b>Schedule:</b>
-              <div class="genre-list">
-                <div
-                  v-for="(day, index) in tvShow.schedule.days"
-                  :key="index"
-                  style="margin-right: 5px"
-                >
-                  {{ day }}, {{ tvShow.schedule.time }}
-                </div>
-              </div>
-            </span>
+            <div>
+              <h4>Rating:</h4>
+              <span>
+                {{ tvShow.rating.average || 'Unknown' }}
+              </span>
+            </div>
             <span class="summary">
               <b>Summary: </b><span v-html="tvShow.summary"></span>
             </span>
@@ -115,6 +108,15 @@ export default {
 
 <style scoped>
 @import '../styles/global-styles.css';
+
+.show-info h4 {
+  display: inline-block;
+}
+
+.show-cover {
+  width: 210px;
+  height: 295px;
+}
 
 .favorites {
   width: 100%;

@@ -8,7 +8,7 @@ const TV_MAZE_BASE_URL = 'https://api.tvmaze.com';
 
 export const store = new Vuex.Store({
   state: {
-    tvShow: null,
+    tvShow: {},
     shows: [],
     showSearchList: [],
     favorites: [],
@@ -58,40 +58,66 @@ export const store = new Vuex.Store({
 
   actions: {
     getShowById({ commit }, id) {
-      axios.get(`${TV_MAZE_BASE_URL}/shows/${id}`).then((response) => {
-        commit('setTvShow', response.data);
-      });
+      axios
+        .get(`${TV_MAZE_BASE_URL}/shows/${id}`)
+        .then((response) => {
+          commit('setTvShow', response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     getShows({ commit }) {
-      axios.get('https://api.tvmaze.com/shows?page=0').then((response) => {
-        console.log('response', response);
-        commit('setShows', response.data);
-      });
+      axios
+        .get(`${TV_MAZE_BASE_URL}/shows?page=0`)
+        .then((response) => {
+          commit('setShows', response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
-    async getShowsSearchList({ commit, state }, searchText) {
+    async getShowsSearchList({ commit }, searchText) {
       try {
-        await axios
-          .get('https://api.tvmaze.com/search/shows?', {
-            params: {
-              q: searchText,
-            },
-          })
-          .then((response) => {
-            // filter shows that contain information
-            state.showSearchList = response.data.filter(function (show) {
-              return show.show.image !== null;
-            });
-            commit('setResultSearch', state.showSearchList);
-          });
+        const response = await axios.get(`${TV_MAZE_BASE_URL}/search/shows?`, {
+          params: {
+            q: searchText.trim(),
+          },
+        });
+        commit('setResultSearch', response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
-    addToFavorites({ commit }, data) {
-      commit('setToFavorites', data);
+    addToFavorites({ commit }, show) {
+      let favoritesList;
+      try {
+        favoritesList = JSON.parse(localStorage.getItem('favoritesList')) || [];
+      } catch (error) {
+        favoritesList = [];
+      }
+      favoritesList.push(show);
+      // saving favorite list to local storage
+      localStorage.setItem('favoritesList', JSON.stringify(favoritesList));
+
+      commit('setToFavorites', favoritesList);
     },
-    removeFromFavorites({ commit }, data) {
-      commit('removeFromFavorites', data);
+    removeFromFavorites({ commit }, show) {
+      let favoritesList;
+      try {
+        favoritesList = JSON.parse(localStorage.getItem('favoritesList')) || [];
+      } catch (error) {
+        favoritesList = [];
+      }
+
+      // create a new array excluding the element show.id
+      const newFavoriteList = favoritesList.filter(
+        (favorite) => favorite.id !== show.id
+      );
+      // saving favorite list to local storage
+      localStorage.setItem('favoritesList', JSON.stringify(newFavoriteList));
+
+      commit('setToFavorites', newFavoriteList);
     },
     getShowsUpcomingEpisodes({ commit }, favorites) {
       // create an array with favorite shows ids
@@ -102,7 +128,7 @@ export const store = new Vuex.Store({
       for (let i = 0; i < idShowList.length; i++) {
         PromiseArr.push(
           axios
-            .get(`https://api.tvmaze.com/shows/${idShowList[i]}?`, {
+            .get(`${TV_MAZE_BASE_URL}/shows/${idShowList[i]}?`, {
               params: {
                 embed: 'nextepisode',
                 // embed: 'episodes',
@@ -113,21 +139,25 @@ export const store = new Vuex.Store({
       }
 
       // Promise.all return the response from all the requests once all of them are successful
-      Promise.all(PromiseArr).then((res) => {
-        // get tv shows with upcoming episodes
-        const showsWithUpcomingEpisodes = res.filter((show) =>
-          Boolean(show._embedded)
-        );
+      Promise.all(PromiseArr)
+        .then((res) => {
+          // get tv shows with upcoming episodes
+          const showsWithUpcomingEpisodes = res.filter((show) =>
+            Boolean(show._embedded)
+          );
 
-        // order by date
-        const showsOrdered = showsWithUpcomingEpisodes.sort(
-          (a, b) =>
-            new Date(a._embedded.nextepisode.airdate) -
-            new Date(b._embedded.nextepisode.airdate)
-        );
+          // order by date
+          const showsOrdered = showsWithUpcomingEpisodes.sort(
+            (a, b) =>
+              new Date(a._embedded.nextepisode.airdate) -
+              new Date(b._embedded.nextepisode.airdate)
+          );
 
-        commit('setUpcomingEpisodes', showsOrdered);
-      });
+          commit('setUpcomingEpisodes', showsOrdered);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 
@@ -141,38 +171,8 @@ export const store = new Vuex.Store({
     setResultSearch(state, data) {
       state.showSearchList = data;
     },
-    setToFavorites(state, show) {
-      let allFavoritesList = [];
-
-      const localData = JSON.parse(localStorage.getItem('favoritesList'));
-
-      if (localData !== null && localData.length > 0) {
-        allFavoritesList = localData;
-      }
-
-      allFavoritesList.push(show);
-
-      state.favorites = allFavoritesList;
-
-      // saving favorite list to local storage
-      localStorage.setItem(
-        'favoritesList',
-        JSON.stringify(this.state.favorites)
-      );
-    },
-    removeFromFavorites(state, data) {
-      let allFavoritesList = [];
-
-      const localData = JSON.parse(localStorage.getItem('favoritesList'));
-
-      if (localData !== null && localData.length > 0) {
-        allFavoritesList = localData;
-      }
-
-      state.favorites = allFavoritesList.filter((show) => show.id !== data.id);
-
-      // saving favorite list to local storage
-      localStorage.setItem('favoritesList', JSON.stringify(state.favorites));
+    setToFavorites(state, favorites) {
+      state.favorites = favorites;
     },
     setUpcomingEpisodes(state, data) {
       state.upcomingEpisodes = data;
