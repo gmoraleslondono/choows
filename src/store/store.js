@@ -71,7 +71,6 @@ export const store = new Vuex.Store({
       axios
         .get(`${TV_MAZE_BASE_URL}/shows?page=0`)
         .then((response) => {
-          console.log('response', response);
           commit('setShows', response.data);
         })
         .catch((error) => {
