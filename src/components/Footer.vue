@@ -25,6 +25,7 @@ export default {
   padding: 1%;
   position: fixed;
   bottom: 0;
+  color: white;
 }
 
 @media screen and (max-width: 767px) {
