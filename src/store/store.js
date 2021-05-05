@@ -31,6 +31,27 @@ export const store = new Vuex.Store({
     upcomingEpisodes: (state) => {
       return state.upcomingEpisodes;
     },
+    checkFavoriteById: (state) => (id) => {
+      let allFavoritesList = [];
+
+      const localData = JSON.parse(localStorage.getItem('favoritesList'));
+
+      if (state.favorites.length > 0) {
+        allFavoritesList = state.favorites;
+      } else if (localData) {
+        allFavoritesList = localData;
+      }
+
+      const isFavoriteShow = allFavoritesList.filter(function (element) {
+        return element.id === id;
+      });
+
+      if (isFavoriteShow && isFavoriteShow.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 
   actions: {
