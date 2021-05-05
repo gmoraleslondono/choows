@@ -58,15 +58,25 @@ export const store = new Vuex.Store({
 
   actions: {
     getShowById({ commit }, id) {
-      axios.get(`${TV_MAZE_BASE_URL}/shows/${id}`).then((response) => {
-        commit('setTvShow', response.data);
-      });
+      axios
+        .get(`${TV_MAZE_BASE_URL}/shows/${id}`)
+        .then((response) => {
+          commit('setTvShow', response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     getShows({ commit }) {
-      axios.get('https://api.tvmaze.com/shows?page=0').then((response) => {
-        console.log('response', response);
-        commit('setShows', response.data);
-      });
+      axios
+        .get('https://api.tvmaze.com/shows?page=0')
+        .then((response) => {
+          console.log('response', response);
+          commit('setShows', response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     getShowsSearchList({ commit }, searchText) {
       axios
@@ -108,21 +118,25 @@ export const store = new Vuex.Store({
       }
 
       // Promise.all return the response from all the requests once all of them are successful
-      Promise.all(PromiseArr).then((res) => {
-        // get tv shows with upcoming episodes
-        const showsWithUpcomingEpisodes = res.filter((show) =>
-          Boolean(show._embedded)
-        );
+      Promise.all(PromiseArr)
+        .then((res) => {
+          // get tv shows with upcoming episodes
+          const showsWithUpcomingEpisodes = res.filter((show) =>
+            Boolean(show._embedded)
+          );
 
-        // order by date
-        const showsOrdered = showsWithUpcomingEpisodes.sort(
-          (a, b) =>
-            new Date(a._embedded.nextepisode.airdate) -
-            new Date(b._embedded.nextepisode.airdate)
-        );
+          // order by date
+          const showsOrdered = showsWithUpcomingEpisodes.sort(
+            (a, b) =>
+              new Date(a._embedded.nextepisode.airdate) -
+              new Date(b._embedded.nextepisode.airdate)
+          );
 
-        commit('setUpcomingEpisodes', showsOrdered);
-      });
+          commit('setUpcomingEpisodes', showsOrdered);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 
