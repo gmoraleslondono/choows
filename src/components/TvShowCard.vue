@@ -12,7 +12,7 @@
       />
       <div class="button-container">
         <Button
-          v-if="favorites && isFavorite(tvShow)"
+          v-if="isFavorite(tvShow.id)"
           :text="'Remove favorite'"
           @click="removeFavorite(tvShow)"
         />
@@ -76,20 +76,15 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(['tvShow', 'favorites']),
+    ...mapGetters(['tvShow', 'checkFavoriteById']),
   },
   methods: {
     ...mapActions(['addToFavorites', 'removeFromFavorites']),
     addFavorites(selectedShow) {
       this.addToFavorites(selectedShow);
     },
-    isFavorite(show) {
-      const result = this.favorites.filter((element) => element.id === show.id);
-      if (result.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
+    isFavorite(id) {
+      return this.checkFavoriteById(id);
     },
     removeFavorite(selectedShow) {
       this.removeFromFavorites(selectedShow);

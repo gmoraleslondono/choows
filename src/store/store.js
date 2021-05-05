@@ -31,6 +31,29 @@ export const store = new Vuex.Store({
     upcomingEpisodes: (state) => {
       return state.upcomingEpisodes;
     },
+    checkFavoriteById: (state) => (id) => {
+      let allFavoritesList = [];
+
+      const localData = JSON.parse(localStorage.getItem('favoritesList'));
+
+      // if the state.favorite is empty take favorites from local storage, in other case favorites list is empty
+      if (state.favorites.length > 0) {
+        allFavoritesList = state.favorites;
+      } else if (localData) {
+        allFavoritesList = localData;
+      }
+
+      // check if show from the search are in the favorite list
+      const isFavoriteShow = allFavoritesList.filter(function (element) {
+        return element.id === id;
+      });
+
+      if (isFavoriteShow && isFavoriteShow.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 
   actions: {
@@ -70,12 +93,11 @@ export const store = new Vuex.Store({
     removeFromFavorites({ commit }, data) {
       commit('removeFromFavorites', data);
     },
-    getShowsUpcomingEpisodes({ commit, state }, favorites) {
+    getShowsUpcomingEpisodes({ commit }, favorites) {
+      // create an array with favorite shows ids
       const idShowList = favorites.map((show) => show.id);
 
-      console.log('state.favorites', state.favorites);
-      console.log('idShowList', idShowList);
-
+      // make one by one request and save it in PromiseArr
       const PromiseArr = [];
       for (let i = 0; i < idShowList.length; i++) {
         PromiseArr.push(
@@ -92,8 +114,6 @@ export const store = new Vuex.Store({
 
       // Promise.all return the response from all the requests once all of them are successful
       Promise.all(PromiseArr).then((res) => {
-        console.log('res', res);
-
         // get tv shows with upcoming episodes
         const showsWithUpcomingEpisodes = res.filter((show) =>
           Boolean(show._embedded)
