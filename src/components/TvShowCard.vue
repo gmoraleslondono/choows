@@ -1,62 +1,68 @@
 <template>
-  <div class="tv-show-card">
-    <div class="flex-box">
-      <img
-        class="show-image"
-        :src="`${
-          tvShow.image
-            ? tvShow.image.medium
-            : require('@/assets/no-image-placeholder.jpg')
-        }`"
-        alt="TV show image"
-      />
-      <div class="button-container">
-        <Button
-          v-if="isFavorite(tvShow.id)"
-          :text="'Remove favorite'"
-          @click="removeFavorite(tvShow)"
+  <div>
+    <div v-if="!tvShow">Loading...</div>
+    <div v-else class="tv-show-card">
+      <div class="flex-box">
+        <img
+          class="show-image"
+          :src="`${
+            tvShow.image
+              ? tvShow.image.medium
+              : require('@/assets/no-image-placeholder.jpg')
+          }`"
+          alt="TV show image"
         />
-        <Button v-else :text="'Add favorites'" @click="addFavorites(tvShow)" />
+        <div class="button-container">
+          <Button
+            v-if="isFavorite(tvShow.id)"
+            :text="'Remove favorite'"
+            @click="removeFavorite(tvShow)"
+          />
+          <Button
+            v-else
+            :text="'Add favorites'"
+            @click="addFavorites(tvShow)"
+          />
+        </div>
       </div>
-    </div>
-    <div class="show-info">
-      <h1 class="title">{{ tvShow.name }}</h1>
-      <div class="show-info-details">
-        <div>
-          <h3>Rating:</h3>
-          <span>{{ tvShow.rating.average }}</span>
-        </div>
-        <div>
-          <h3>Type:</h3>
-          <span>{{ tvShow.type }}</span>
-        </div>
-        <div>
-          <h3>Language:</h3>
-          <span>{{ tvShow.language }}</span>
-        </div>
-        <div>
-          <h3>Premiered:</h3>
-          <span>{{ tvShow.premiered }}</span>
-        </div>
-        <div>
-          <h3>Status:</h3>
-          <span>{{ tvShow.status }}</span>
-        </div>
-        <div style="display: flex">
-          <h3>Genres:</h3>
-          <div class="genre-list">
-            <div
-              v-for="(genre, index) in tvShow.genres"
-              :key="index"
-              style="margin-right: 5px"
-            >
-              <span>{{ genre }}</span>
-            </div>
+      <div class="show-info">
+        <h1 class="title">{{ tvShow.name }}</h1>
+        <div class="show-info-details">
+          <div>
+            <h3>Rating:</h3>
+            <span>{{ tvShow.rating.average }}</span>
           </div>
-        </div>
-        <div>
-          <h3>Summary:</h3>
-          <span v-html="tvShow.summary"></span>
+          <div>
+            <h3>Type:</h3>
+            <span>{{ tvShow.type }}</span>
+          </div>
+          <div>
+            <h3>Language:</h3>
+            <span>{{ tvShow.language }}</span>
+          </div>
+          <div>
+            <h3>Premiered:</h3>
+            <span>{{ tvShow.premiered }}</span>
+          </div>
+          <div>
+            <h3>Status:</h3>
+            <span>{{ tvShow.status }}</span>
+          </div>
+          <div>
+            <h3>Schedule:</h3>
+            <span>
+              {{ tvShow.schedule.days.join(', ') }} at
+              {{ tvShow.schedule.time }}
+            </span>
+          </div>
+          <div>
+            <h3>Genres:</h3>
+            <span>{{ tvShow.genres.join(', ') }}</span>
+          </div>
+          <div>
+            <h3>Summary:</h3>
+            <span v-html="tvShow.summary"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -71,9 +77,6 @@ export default {
   name: 'TvShowCard',
   components: {
     Button,
-  },
-  data() {
-    return {};
   },
   computed: {
     ...mapGetters(['tvShow', 'checkFavoriteById']),
@@ -109,7 +112,6 @@ export default {
 .flex-box {
   display: flex;
   flex-direction: column;
-  width: 35%;
 }
 
 .show-image {
@@ -124,13 +126,12 @@ export default {
   display: flex;
   flex-direction: column;
   width: 60%;
-  gap: 20px;
 }
 
 .show-info-details {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 .show-info h3 {
@@ -171,7 +172,7 @@ export default {
   .title {
     text-align: center;
     font-size: 2rem;
-    margin: 5% 0 0;
+    margin-top: 5%;
   }
 
   .show-info-details {

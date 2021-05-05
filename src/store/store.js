@@ -8,7 +8,7 @@ const TV_MAZE_BASE_URL = 'https://api.tvmaze.com';
 
 export const store = new Vuex.Store({
   state: {
-    tvShow: null,
+    tvShow: {},
     shows: [],
     showSearchList: [],
     favorites: [],
