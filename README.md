@@ -10,9 +10,9 @@ https://www.figma.com/file/oJz4fk0U8hogJJRuzInjGI/choows
 
 ## 🚥 Lighthouse report
 
-Home: https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2F
-Favorites:https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2Ffavorites
-Upcoming: https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2Fupcoming
+Home: https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2F  
+Favorites:https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2Ffavorites  
+Upcoming: https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2Fupcoming  
 
 
 ## 🏆 The goal
