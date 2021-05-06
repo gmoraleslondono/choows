@@ -8,6 +8,13 @@ Users can search TV shows by name, see details such as rating, summary, etc. And
 
 https://www.figma.com/file/oJz4fk0U8hogJJRuzInjGI/choows
 
+## 🚥 Lighthouse report
+
+Home: https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2F
+Favorites:https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2Ffavorites
+Upcoming: https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fchoows.vercel.app%2Fupcoming
+
+
 ## 🏆 The goal
 
 It is a web application integrated with TV Maze public REST API. It was built using Vue.js and a central store to share data Vuex, using reusable components (e.g. header, footer, etc.) and different views connected.
