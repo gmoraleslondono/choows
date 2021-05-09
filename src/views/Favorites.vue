@@ -189,6 +189,11 @@ h1 {
 }
 
 @media screen and (max-width: 450px) {
+  .show-cover {
+    width: 100%;
+    height: auto;
+  }
+
   .favorites {
     padding-bottom: 15%;
   }
@@ -216,8 +221,6 @@ h1 {
   }
 
   h1 {
-    width: 50%;
-    padding: 0 2%;
     font-size: 1.3rem;
   }
 
