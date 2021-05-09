@@ -82,11 +82,15 @@ export default {
   }
 
   .border {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 10px;
     padding: 5px 10px;
     width: 100%;
     margin-bottom: 10px;
+  }
+
+  .home .border {
+    border: 1px solid black;
   }
 }
 
