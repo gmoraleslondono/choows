@@ -190,10 +190,6 @@ input {
   text-align: center;
 }
 
-img {
-  min-height: 295px;
-}
-
 @media screen and (max-width: 1024px) {
   .show-preview {
     width: 30%;
